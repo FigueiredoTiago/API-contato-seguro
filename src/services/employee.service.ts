@@ -60,3 +60,17 @@ export const updateEmployeeService = async (
 
   return updated;
 };
+
+//service para deletar um funcionario:
+
+export const deleteEmployeeService = async (id: string) => {
+  const employee = await EmployeeModel.findById(id);
+
+  if (!employee) {
+    throw { status: 404, message: "Employee not Found" };
+  }
+
+  await EmployeeModel.findByIdAndDelete(id);
+
+  return;
+};

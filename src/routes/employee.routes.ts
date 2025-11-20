@@ -6,6 +6,7 @@ import {
 import {
   createEmployeeController,
   updateEmployeeController,
+  deleteEmployeeController,
 } from "../controllers/employee.controller";
 import {
   createEmployeeSchema,
@@ -26,6 +27,12 @@ router.patch(
   validateParams(employeeIdSchema),
   validate(updateEmployeeSchema),
   updateEmployeeController
+);
+
+router.delete(
+  "/:id",
+  validateParams(employeeIdSchema),
+  deleteEmployeeController
 );
 
 export default router;

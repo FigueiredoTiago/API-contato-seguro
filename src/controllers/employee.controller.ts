@@ -1,6 +1,7 @@
 import {
   createEmployeeService,
   updateEmployeeService,
+  deleteEmployeeService,
 } from "../services/employee.service";
 import { Request, Response } from "express";
 import { CreateEmployeeDTO } from "../schemas/employee.schema";
@@ -41,6 +42,22 @@ export const updateEmployeeController = async (req: Request, res: Response) => {
   } catch (error: any) {
     if (error.status === 404) {
       console.log(error);
+      return res.status(404).json({ message: error.message });
+    }
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+//controller para deletar um funcionario por ID
+
+export const deleteEmployeeController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    await deleteEmployeeService(id);
+    return res.status(200).send({ message: "Employee deleted successfully" });
+  } catch (error: any) {
+    if (error.status === 404) {
       return res.status(404).json({ message: error.message });
     }
     return res.status(500).json({ message: "Internal Server Error" });
