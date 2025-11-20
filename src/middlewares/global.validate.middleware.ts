@@ -17,7 +17,7 @@ export const validate =
         });
       }
       return res.status(500).json({
-        message: "Erro interno",
+        message: "Internal Server Error",
       });
     }
   };

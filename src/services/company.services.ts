@@ -97,7 +97,7 @@ export const createCompanyService = async (data: CreateCompanyDTO) => {
       throw new Error("CNPJ already exists");
     }
     throw error;
-  }
+  } 
 };
 
 //service para Buscar informacao de Uma empresa pelo CNPJ ou Pelo Nome
