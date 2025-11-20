@@ -38,3 +38,31 @@ export const companyIdSchema = z.object({
 });
 
 export type CompanyIdDTO = z.infer<typeof companyIdSchema>;
+
+//schema para validar atualizacao de uma empresa
+
+export const updateCompanySchema = z
+  .object({
+    name: z.string("Name is required").optional(),
+    sector: z.string("Sector is required").optional(),
+
+    cnpj: z.string("CNPJ is required").min(14, "CNPJ is invalid").optional(),
+
+    city: z.string("City is required").optional(),
+
+    state: z.string("State is required").optional(),
+  })
+  .refine(
+    (data) =>
+      data.name !== undefined ||
+      data.sector !== undefined ||
+      data.cnpj !== undefined ||
+      data.city !== undefined ||
+      data.state !== undefined,
+    {
+      message: "Pelo menos um campo deve ser preenchido para editar",
+      path: ["name", "sector", "cnpj", "city", "state"],
+    }
+  );
+
+export type CompanyUpdateDTO = z.infer<typeof updateCompanySchema>;

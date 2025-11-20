@@ -3,6 +3,7 @@ import { EmployeeModel } from "../models/employee.model";
 import {
   CreateCompanyDTO,
   GetCompanyQueryDTO,
+  CompanyUpdateDTO,
 } from "../schemas/company.schema";
 
 //service para criar uma Nova Empresa
@@ -65,4 +66,19 @@ export const deleteCompanyService = async (id: string) => {
   await CompanyModel.findByIdAndDelete(id);
 
   return;
+};
+
+export const updateCompanyService = async (
+  data: CompanyUpdateDTO,
+  id: string
+) => {
+  const company = await CompanyModel.findById(id).lean();
+
+  if (!company) {
+    throw { status: 404, message: "Company not Found" };
+  }
+
+  const updated = await CompanyModel.findByIdAndUpdate(id, data);
+
+  return updated;
 };

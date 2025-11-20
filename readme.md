@@ -8,7 +8,7 @@ precisa, obrigatoriamente estar vinculado a uma empresa:
    Criação de empresa (nome, setor, CNPJ, cidade, etc) +++++++++CONCLUIDO+++++++++
    Atualização de empresa
    Busca das informações da empresa +++++++++CONCLUIDO+++++++++
-   Exclusão de empresa
+   Exclusão de empresa +++++++++CONCLUIDO+++++++++
 
 2. Funcionário (CRUD completo) -
    Nome (obrigatório) - - - - - -

@@ -11,7 +11,7 @@ export const validate =
         return res.status(400).json({
           message: "Dados inválidos",
           errors: err.issues.map((issue) => ({
-            path: issue.path.join("."),
+            path: issue.path.join(", "),
             message: issue.message,
           })),
         });
@@ -53,7 +53,7 @@ export const validateParams =
         return res.status(400).json({
           message: "Parâmetros inválidos",
           errors: err.issues.map((issue: any) => ({
-            path: issue.path.join("."),
+            path: issue.path.join(" , "),
             message: issue.message,
           })),
         });

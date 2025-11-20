@@ -9,11 +9,13 @@ import {
   getCompanyController,
   listCompanyEmployeesController,
   deleteCompanyController,
+  updateCompanyController,
 } from "../controllers/company.controllers";
 import {
   createCompanySchema,
   getCompanyQuerySchema,
   companyIdSchema,
+  updateCompanySchema,
 } from "../schemas/company.schema";
 
 const router = Router();
@@ -33,3 +35,12 @@ router.get(
 
 //rota para deletar uma empresa e seus funcionarios
 router.delete("/:id", validateParams(companyIdSchema), deleteCompanyController);
+
+//rota para atualizar uma empresa
+
+router.patch(
+  "/:id",
+  validateParams(companyIdSchema),
+  validate(updateCompanySchema),
+  updateCompanyController
+);
