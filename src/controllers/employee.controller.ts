@@ -8,10 +8,13 @@ export const createEmployeeController = async (req: Request, res: Response) => {
   try {
     const data: CreateEmployeeDTO = req.body;
     const employee = await createEmployeeService(data);
-    res
+    return res
       .status(201)
       .send({ message: "Employee created successfully", employee });
   } catch (error: any) {
+    if (error.status === 404) {
+      return res.status(404).json({ message: error.message });
+    }
     if (error.status === 409) {
       return res.status(409).json({ message: error.message });
     }
