@@ -8,7 +8,7 @@ export interface IEmployee extends Document {
   createdAtDate: Date;
   terminationDate?: Date;
   password: string;
-  company: mongoose.Types.ObjectId;
+  companyId: mongoose.Types.ObjectId;
 }
 
 const EmployeeSchema = new Schema<IEmployee>(
@@ -45,7 +45,7 @@ const EmployeeSchema = new Schema<IEmployee>(
       type: String,
       required: true,
     },
-    company: {
+    companyId: {
       type: Schema.Types.ObjectId,
       ref: "Company",
       required: true,
