@@ -4,6 +4,7 @@ import {
   deleteCompanyService,
   listCompanyEmployeesService,
   updateCompanyService,
+  getAllCompanyService,
 } from "../services/company.services";
 import { Request, Response } from "express";
 import { GetCompanyQueryDTO } from "../schemas/company.schema";
@@ -105,6 +106,24 @@ export const updateCompanyController = async (req: Request, res: Response) => {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
     }
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+//controller Bonus pra pegar todas as empresas cadastradas no BD
+
+export const getAllCompanyController = async (req: Request, res: Response) => {
+  try {
+    const result = await getAllCompanyService();
+    if (result.length === 0) {
+      return res
+        .status(404)
+        .send({ message: "No company found", companies: [] });
+    }
+    return res
+      .status(200)
+      .send({ message: "Companies retrieved successfully", result });
+  } catch (error: any) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

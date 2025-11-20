@@ -10,6 +10,7 @@ import {
   listCompanyEmployeesController,
   deleteCompanyController,
   updateCompanyController,
+  getAllCompanyController,
 } from "../controllers/company.controllers";
 import {
   createCompanySchema,
@@ -20,11 +21,13 @@ import {
 
 const router = Router();
 
-router.post("/create", validate(createCompanySchema), createCompanyController);
-export default router;
-
 //rota para buscar empresa pelo nome ou cmpj por query params
 router.get("/info", validateQuery(getCompanyQuerySchema), getCompanyController);
+
+//Rota Bonus para pegar todas as empresas cadastradas
+router.get("/all", getAllCompanyController);
+
+router.post("/create", validate(createCompanySchema), createCompanyController);
 
 //rota para listar todos os funcionarios de uma empresa
 router.get(
@@ -44,3 +47,5 @@ router.patch(
   validate(updateCompanySchema),
   updateCompanyController
 );
+
+export default router;

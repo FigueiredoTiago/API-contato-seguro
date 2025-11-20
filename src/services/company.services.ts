@@ -85,3 +85,10 @@ export const updateCompanyService = async (
 
   return updated;
 };
+
+//Service bonus para Listar todas as empresas cadastradas no banco de dados
+
+export const getAllCompanyService = async () => {
+  const result = await CompanyModel.find().lean();
+  return result;
+};

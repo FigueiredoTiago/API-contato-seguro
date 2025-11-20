@@ -17,6 +17,9 @@ import {
 
 const router = Router();
 
+//rota bonus
+router.get("/all", getAllEmployeesController);
+
 router.post(
   "/create",
   validate(createEmployeeSchema),
@@ -35,7 +38,5 @@ router.delete(
   validateParams(employeeIdSchema),
   deleteEmployeeController
 );
-
-router.get("/all", getAllEmployeesController);
 
 export default router;
