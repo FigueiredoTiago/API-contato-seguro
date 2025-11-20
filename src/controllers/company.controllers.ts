@@ -56,6 +56,12 @@ export const listCompanyEmployeesController = async (
 
   try {
     const result = await listCompanyEmployeesService(id);
+
+    if (result.employees.length === 0)
+      return res
+        .status(404)
+        .send({ message: "No employees found for this company" });
+
     return res.status(200).send(result);
   } catch (error: any) {
     if (error.status === 404) {

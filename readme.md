@@ -6,7 +6,7 @@ precisa, obrigatoriamente estar vinculado a uma empresa:
 
 1. Empresa (CRUD completo) -
    Criação de empresa (nome, setor, CNPJ, cidade, etc) +++++++++CONCLUIDO+++++++++
-   Atualização de empresa
+   Atualização de empresa +++++++++CONCLUIDO+++++++++
    Busca das informações da empresa +++++++++CONCLUIDO+++++++++
    Exclusão de empresa +++++++++CONCLUIDO+++++++++
 
