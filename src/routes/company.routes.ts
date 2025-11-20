@@ -6,6 +6,7 @@ import {
 import {
   createCompanyController,
   getCompanyController,
+  listCompanyEmployeesController,
 } from "../controllers/company.controllers";
 import {
   createCompanySchema,
@@ -19,3 +20,6 @@ export default router;
 
 //rota para buscar empresa pelo nome ou cmpj por query params
 router.get("/info", validateQuery(getCompanyQuerySchema), getCompanyController);
+
+//rota para listar todos os funcionarios de uma empresa
+router.get("/:id", listCompanyEmployeesController);

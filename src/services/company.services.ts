@@ -1,4 +1,5 @@
 import { CompanyModel } from "../models/company.model";
+import { EmployeeModel } from "../models/employee.model";
 import {
   CreateCompanyDTO,
   GetCompanyQueryDTO,
@@ -33,4 +34,20 @@ export const getCompanyService = async (query: GetCompanyQueryDTO) => {
 
   const companies = await CompanyModel.find(filter).lean();
   return companies;
+};
+
+//service para listar todos os funcionarios vinculados a uma empresa
+
+export const listCompanyEmployeesService = async (id: string) => {
+  const company = await CompanyModel.findById(id).lean();
+  if (!company) {
+    throw { status: 404, message: "Company not Found" };
+  }
+
+  const employees = await EmployeeModel.find({ companyId: id }).lean();
+
+  return {
+    company,
+    employees,
+  };
 };
