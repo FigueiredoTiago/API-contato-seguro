@@ -1,4 +1,4 @@
-import { ZodObject } from "zod";
+import { ZodObject, ZodError } from "zod";
 import { Request, Response, NextFunction } from "express";
 
 export const validate =
@@ -7,9 +7,17 @@ export const validate =
       schema.parse(req.body);
       next();
     } catch (err: any) {
-      return res.status(400).json({
-        message: "Dados inválidos",
-        errors: err.message,
+      if (err instanceof ZodError) {
+        return res.status(400).json({
+          message: "Dados inválidos",
+          errors: err.issues.map((issue) => ({
+            path: issue.path.join("."),
+            message: issue.message,
+          })),
+        });
+      }
+      return res.status(500).json({
+        message: "Erro interno",
       });
     }
   };
