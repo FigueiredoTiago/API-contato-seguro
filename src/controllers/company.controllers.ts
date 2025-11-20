@@ -11,8 +11,11 @@ export const createCompanyController = async (req: Request, res: Response) => {
     return res
       .status(201)
       .send({ message: "Company created Successfully", company });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send({ message: "Internal Server Error", error });
+  } catch (error: any) {
+    if (error.message === "CNPJ already exists") {
+      return res.status(409).json({ message: error.message });
+    }
+
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };

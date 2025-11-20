@@ -11,3 +11,5 @@ export const createCompanySchema = z.object({
 
   state: z.string("State is required").nonempty("State is required"),
 });
+
+export type CreateCompanyDTO = z.infer<typeof createCompanySchema>;
