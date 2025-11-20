@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  # ------------------------
+  # PRODUÇÃO >> docker compose --profile prod up --build
+
+  # ------------------------
+  api:
+    build:
+      context: .
+      target: prod
+    container_name: api-prod
+    command: node dist/server.js
+    ports:
+      - "5000:5000"
+    env_file: .env
+    depends_on:
+      - mongo
+    profiles:
+      - prod
+
+  # ------------------------
+  # DESENVOLVIMENTO  >> docker compose --profile dev up --build
+
+  # ------------------------
+  api-dev:
+    build:
+      context: .
+      target: dev
+    container_name: api-dev
+    command: npm run dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file: .env
+    depends_on:
+      - mongo
+    profiles:
+      - dev
+
+  # ------------------------
+  # BANCO
+  # ------------------------
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    profiles:
+      - dev
+      - prod
+
+volumes:
+  mongo-data:
