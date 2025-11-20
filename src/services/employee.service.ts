@@ -74,3 +74,10 @@ export const deleteEmployeeService = async (id: string) => {
 
   return;
 };
+
+//Service para listar TODOS os Funcionarios Cadastrados no BD --ROTA BONUS -
+
+export const getAllEmployeesService = async () => {
+  const result = await EmployeeModel.find().lean(); 
+  return result;
+};

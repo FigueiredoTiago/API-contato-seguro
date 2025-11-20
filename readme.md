@@ -10,9 +10,13 @@ precisa, obrigatoriamente estar vinculado a uma empresa:
    Busca das informações da empresa +++++++++CONCLUIDO+++++++++
    Exclusão de empresa +++++++++CONCLUIDO+++++++++
 
+   Bonus LISTAR TODAS AS EMPRESAS ---
+
 O sistema deve permitir as seguintes operações para funcionários:
 
 1. Criar um funcionário +++++++++CONCLUIDO+++++++++
 2. Listar todos os funcionários de uma empresa +++++++++CONCLUIDO+++++++++
 3. Atualizar os dados de um funcionário +++++++++CONCLUIDO+++++++++
 4. Deletar definitivamente um funcionário +++++++++CONCLUIDO+++++++++
+
+Bonus LISTAR TODOS OS FUNCIONARIOS ---

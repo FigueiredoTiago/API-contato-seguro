@@ -7,6 +7,7 @@ import {
   createEmployeeController,
   updateEmployeeController,
   deleteEmployeeController,
+  getAllEmployeesController,
 } from "../controllers/employee.controller";
 import {
   createEmployeeSchema,
@@ -34,5 +35,7 @@ router.delete(
   validateParams(employeeIdSchema),
   deleteEmployeeController
 );
+
+router.get("/all", getAllEmployeesController);
 
 export default router;
