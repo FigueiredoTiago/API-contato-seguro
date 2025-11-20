@@ -5,12 +5,45 @@ import {
   listCompanyEmployeesService,
   updateCompanyService,
   getAllCompanyService,
+  createCompanyWithEmployeeService,
 } from "../services/company.services";
 import { Request, Response } from "express";
 import { GetCompanyQueryDTO } from "../schemas/company.schema";
+import { CreateEmployeeDTO } from "../schemas/employee.schema";
+import { CreateCompanyDTO } from "../schemas/company.schema";
+
+interface CreateCompanyWithEmployeeDTO {
+  company: CreateCompanyDTO;
+  employee: Omit<CreateEmployeeDTO, "companyId">;
+}
+
+//Controller para Criar Empresa e Funcionario ao mesmo tempo
+export const createCompanyWithEmployeeController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const data: CreateCompanyWithEmployeeDTO = req.body;
+
+    const result = await createCompanyWithEmployeeService(data);
+
+    return res.status(201).json({
+      message: "Company and first employee created successfully",
+      company: result.company,
+      employee: result.employee,
+    });
+  } catch (error: any) {
+    if (error.message === "CNPJ already exists") {
+      return res.status(409).json({ message: error.message });
+    }
+    const status = error.status || 500;
+    return res.status(status).json({
+      message: error.message || "Internal Server Error",
+    });
+  }
+};
 
 //controller para criar uma empresa
-
 export const createCompanyController = async (req: Request, res: Response) => {
   const data = req.body;
 

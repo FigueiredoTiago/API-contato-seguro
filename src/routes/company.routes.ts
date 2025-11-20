@@ -3,6 +3,7 @@ import {
   validate,
   validateQuery,
   validateParams,
+  validateCompanyWithEmployee,
 } from "../middlewares/global.validate.middleware";
 import {
   createCompanyController,
@@ -11,6 +12,7 @@ import {
   deleteCompanyController,
   updateCompanyController,
   getAllCompanyController,
+  createCompanyWithEmployeeController,
 } from "../controllers/company.controllers";
 import {
   createCompanySchema,
@@ -18,6 +20,7 @@ import {
   companyIdSchema,
   updateCompanySchema,
 } from "../schemas/company.schema";
+import { createCompanyWithEmployeeSchema } from "../schemas/companyAndEmployee.schema";
 
 const router = Router();
 
@@ -26,6 +29,14 @@ router.get("/info", validateQuery(getCompanyQuerySchema), getCompanyController);
 
 //Rota Bonus para pegar todas as empresas cadastradas
 router.get("/all", getAllCompanyController);
+
+//Rota para criar empresa e Funcionario
+
+router.post(
+  "/create-with-employee",
+  validateCompanyWithEmployee(createCompanyWithEmployeeSchema),
+  createCompanyWithEmployeeController
+);
 
 router.post("/create", validate(createCompanySchema), createCompanyController);
 
