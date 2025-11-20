@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import {
   CreateEmployeeDTO,
   UpdateEmployeeDTO,
@@ -33,8 +34,11 @@ export const createEmployeeService = async (data: CreateEmployeeDTO) => {
     };
   }
 
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+
   const employee = await EmployeeModel.create({
     ...data,
+    password: hashedPassword,
     companyId: data.companyId,
   });
 
@@ -78,6 +82,6 @@ export const deleteEmployeeService = async (id: string) => {
 //Service para listar TODOS os Funcionarios Cadastrados no BD --ROTA BONUS -
 
 export const getAllEmployeesService = async () => {
-  const result = await EmployeeModel.find().lean(); 
+  const result = await EmployeeModel.find().lean();
   return result;
 };
