@@ -18,8 +18,8 @@ export type CreateCompanyDTO = z.infer<typeof createCompanySchema>;
 
 export const getCompanyQuerySchema = z
   .object({
-    cnpj: z.string().min(1, "CNPJ deve ser uma string não vazia").optional(),
-    name: z.string().min(1, "Name deve ser uma string não vazia").optional(),
+    cnpj: z.string().min(1, "CNPJ is Required").optional(),
+    name: z.string().min(1, "Name is Required").optional(),
   })
   .refine((data) => data.cnpj !== undefined || data.name !== undefined, {
     message: "Pelo menos cnpj ou name deve ser informado",
@@ -27,3 +27,14 @@ export const getCompanyQuerySchema = z
   });
 
 export type GetCompanyQueryDTO = z.infer<typeof getCompanyQuerySchema>;
+
+//schema para validar os IDS
+
+export const companyIdSchema = z.object({
+  id: z
+    .string()
+    .length(24, "O ID must be 24 characters long")
+    .nonempty("O ID is required"),
+});
+
+export type CompanyIdDTO = z.infer<typeof companyIdSchema>;

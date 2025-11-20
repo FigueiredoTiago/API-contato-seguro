@@ -1,6 +1,7 @@
 import {
   createCompanyService,
   getCompanyService,
+  deleteCompanyService,
   listCompanyEmployeesService,
 } from "../services/company.services";
 import { Request, Response } from "express";
@@ -60,6 +61,24 @@ export const listCompanyEmployeesController = async (
       return res.status(404).json({ message: error.message });
     }
 
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+//contrler para deletar uma empresa e seus funcionarios
+
+export const deleteCompanyController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    await deleteCompanyService(id);
+    return res
+      .status(200)
+      .send({ message: "Company and employees deleted successfully" });
+  } catch (error: any) {
+    if (error.status === 404) {
+      return res.status(404).json({ message: error.message });
+    }
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

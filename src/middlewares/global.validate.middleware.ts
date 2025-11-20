@@ -42,3 +42,22 @@ export const validateQuery =
       });
     }
   };
+
+export const validateParams =
+  (schema: ZodObject) => (req: Request, res: Response, next: NextFunction) => {
+    try {
+      schema.parse(req.params);
+      next();
+    } catch (err: any) {
+      if (err?.issues) {
+        return res.status(400).json({
+          message: "Parâmetros inválidos",
+          errors: err.issues.map((issue: any) => ({
+            path: issue.path.join("."),
+            message: issue.message,
+          })),
+        });
+      }
+      return res.status(500).json({ message: "Erro interno" });
+    }
+  };

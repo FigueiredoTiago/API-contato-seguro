@@ -2,15 +2,18 @@ import { Router } from "express";
 import {
   validate,
   validateQuery,
+  validateParams,
 } from "../middlewares/global.validate.middleware";
 import {
   createCompanyController,
   getCompanyController,
   listCompanyEmployeesController,
+  deleteCompanyController,
 } from "../controllers/company.controllers";
 import {
   createCompanySchema,
   getCompanyQuerySchema,
+  companyIdSchema,
 } from "../schemas/company.schema";
 
 const router = Router();
@@ -22,4 +25,11 @@ export default router;
 router.get("/info", validateQuery(getCompanyQuerySchema), getCompanyController);
 
 //rota para listar todos os funcionarios de uma empresa
-router.get("/:id", listCompanyEmployeesController);
+router.get(
+  "/:id",
+  validateParams(companyIdSchema),
+  listCompanyEmployeesController
+);
+
+//rota para deletar uma empresa e seus funcionarios
+router.delete("/:id", validateParams(companyIdSchema), deleteCompanyController);

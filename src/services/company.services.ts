@@ -51,3 +51,18 @@ export const listCompanyEmployeesService = async (id: string) => {
     employees,
   };
 };
+
+//servico para apagar uma empresa e seus funcionarios vinculados
+
+export const deleteCompanyService = async (id: string) => {
+  const company = await CompanyModel.findById(id).lean();
+
+  if (!company) {
+    throw { status: 404, message: "Company not Found" };
+  }
+
+  await EmployeeModel.deleteMany({ companyId: id });
+  await CompanyModel.findByIdAndDelete(id);
+
+  return;
+};
