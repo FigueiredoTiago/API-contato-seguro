@@ -13,3 +13,17 @@ export const createCompanySchema = z.object({
 });
 
 export type CreateCompanyDTO = z.infer<typeof createCompanySchema>;
+
+//schema para validar a busca das informacoes de uma empresa pelo CNPJ ou Nome
+
+export const getCompanyQuerySchema = z
+  .object({
+    cnpj: z.string().min(1, "CNPJ deve ser uma string não vazia").optional(),
+    name: z.string().min(1, "Name deve ser uma string não vazia").optional(),
+  })
+  .refine((data) => data.cnpj !== undefined || data.name !== undefined, {
+    message: "Pelo menos cnpj ou name deve ser informado",
+    path: ["cnpj", "name"],
+  });
+
+export type GetCompanyQueryDTO = z.infer<typeof getCompanyQuerySchema>;
