@@ -1,4 +1,7 @@
-import { CreateEmployeeDTO } from "../schemas/employee.schema";
+import {
+  CreateEmployeeDTO,
+  UpdateEmployeeDTO,
+} from "../schemas/employee.schema";
 import { EmployeeModel } from "../models/employee.model";
 import { CompanyModel } from "../models/company.model";
 
@@ -36,4 +39,24 @@ export const createEmployeeService = async (data: CreateEmployeeDTO) => {
   });
 
   return employee;
+};
+
+//servico para atualizar um funcionario:
+
+export const updateEmployeeService = async (
+  data: UpdateEmployeeDTO,
+  id: string
+) => {
+  const employee = await EmployeeModel.findById(id);
+
+  if (!employee) {
+    throw { status: 404, message: "Employee not Found" };
+  }
+
+  const updated = await EmployeeModel.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
+
+  return updated;
 };

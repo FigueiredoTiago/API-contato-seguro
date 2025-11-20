@@ -10,18 +10,9 @@ precisa, obrigatoriamente estar vinculado a uma empresa:
    Busca das informações da empresa +++++++++CONCLUIDO+++++++++
    Exclusão de empresa +++++++++CONCLUIDO+++++++++
 
-2. Funcionário (CRUD completo) -
-   Nome (obrigatório) - - - - - -
-   Email (obrigatório)
-   Cargo (obrigatório)
-   Status (padrão: "ativo")
-   Data de criação (obrigatório)
-   Data de desligamento (opcional)
-   Senha (obrigatório)
-
 O sistema deve permitir as seguintes operações para funcionários:
 
 1. Criar um funcionário +++++++++CONCLUIDO+++++++++
 2. Listar todos os funcionários de uma empresa +++++++++CONCLUIDO+++++++++
-3. Atualizar os dados de um funcionário
+3. Atualizar os dados de um funcionário +++++++++CONCLUIDO+++++++++
 4. Deletar definitivamente um funcionário

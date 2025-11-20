@@ -72,13 +72,16 @@ export const updateCompanyService = async (
   data: CompanyUpdateDTO,
   id: string
 ) => {
-  const company = await CompanyModel.findById(id).lean();
+  const company = await CompanyModel.findById(id);
 
   if (!company) {
     throw { status: 404, message: "Company not Found" };
   }
 
-  const updated = await CompanyModel.findByIdAndUpdate(id, data);
+  const updated = await CompanyModel.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
 
   return updated;
 };

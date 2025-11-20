@@ -1,4 +1,7 @@
-import { createEmployeeService } from "../services/employee.service";
+import {
+  createEmployeeService,
+  updateEmployeeService,
+} from "../services/employee.service";
 import { Request, Response } from "express";
 import { CreateEmployeeDTO } from "../schemas/employee.schema";
 
@@ -19,6 +22,27 @@ export const createEmployeeController = async (req: Request, res: Response) => {
       return res.status(409).json({ message: error.message });
     }
 
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+//controller para editar um funcionario
+
+export const updateEmployeeController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  try {
+    const updated = await updateEmployeeService(data, id);
+
+    return res
+      .status(200)
+      .send({ message: "Employee updated Successfully", updated });
+  } catch (error: any) {
+    if (error.status === 404) {
+      console.log(error);
+      return res.status(404).json({ message: error.message });
+    }
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

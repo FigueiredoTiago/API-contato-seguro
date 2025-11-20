@@ -1,10 +1,17 @@
 import { Router } from "express";
 import {
   validate,
-  validateQuery,
+  validateParams,
 } from "../middlewares/global.validate.middleware";
-import { createEmployeeController } from "../controllers/employee.controller";
-import { createEmployeeSchema } from "../schemas/employee.schema";
+import {
+  createEmployeeController,
+  updateEmployeeController,
+} from "../controllers/employee.controller";
+import {
+  createEmployeeSchema,
+  updateEmployeeSchema,
+  employeeIdSchema,
+} from "../schemas/employee.schema";
 
 const router = Router();
 
@@ -12,6 +19,13 @@ router.post(
   "/create",
   validate(createEmployeeSchema),
   createEmployeeController
+);
+
+router.patch(
+  "/:id",
+  validateParams(employeeIdSchema),
+  validate(updateEmployeeSchema),
+  updateEmployeeController
 );
 
 export default router;

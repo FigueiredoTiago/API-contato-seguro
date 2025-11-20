@@ -12,3 +12,52 @@ export const createEmployeeSchema = z.object({
 });
 
 export type CreateEmployeeDTO = z.infer<typeof createEmployeeSchema>;
+
+export const updateEmployeeSchema = z
+  .object({
+    name: z.string().optional(),
+    email: z.string().optional(),
+    role: z.string().optional(),
+    status: z.enum(["active", "inactive"]).optional(),
+    createdAtDate: z.coerce.date().optional(),
+    terminationDate: z.coerce.date().optional(),
+    password: z.string().optional(),
+    companyId: z.string().optional(),
+  })
+  .refine(
+    (data) =>
+      data.name !== undefined ||
+      data.email !== undefined ||
+      data.role !== undefined ||
+      data.status !== undefined ||
+      data.createdAtDate !== undefined ||
+      data.terminationDate !== undefined ||
+      data.password !== undefined ||
+      data.companyId !== undefined,
+    {
+      message: "Pelo menos um campo deve ser preenchido para editar",
+      path: [
+        "name",
+        "email",
+        "role",
+        "status",
+        "createdAtDate",
+        "terminationDate",
+        "password",
+        "companyId",
+      ],
+    }
+  );
+
+export type UpdateEmployeeDTO = z.infer<typeof updateEmployeeSchema>;
+
+//schema para validar os IDS
+
+export const employeeIdSchema = z.object({
+  id: z
+    .string()
+    .length(24, "O ID must be 24 characters long")
+    .nonempty("O ID is required"),
+});
+
+export type employeeIdDTO = z.infer<typeof employeeIdSchema>;
