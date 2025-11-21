@@ -64,7 +64,7 @@ export const companyDocs = {
           },
         },
         400: {
-          description: "Dados inválidos",
+          description: "Dados inválidos (erro de validação com Zod)",
           content: {
             "application/json": {
               schema: {
@@ -236,7 +236,7 @@ export const companyDocs = {
         },
 
         400: {
-          description: "Dados inválidos",
+          description: "Dados inválidos (erro de validação com Zod)",
           content: {
             "application/json": {
               schema: {
@@ -378,7 +378,8 @@ export const companyDocs = {
         },
 
         400: {
-          description: "Parâmetros inválidos (ID incorreto ou body vazio)",
+          description:
+            "Parâmetros inválidos (ID incorreto ou body vazio, erro de validação com Zod)",
           content: {
             "application/json": {
               schema: {
@@ -826,6 +827,8 @@ export const companyDocs = {
     delete: {
       summary: "Deleta uma empresa pelo ID",
       tags: ["Company"],
+      description:
+        "Empresa e funcionários nessa Rota vai ser Excluidos Simultaneamente!",
       parameters: [
         {
           name: "id",

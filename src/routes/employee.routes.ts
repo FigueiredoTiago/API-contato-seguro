@@ -34,7 +34,7 @@ router.patch(
 );
 
 router.delete(
-  "/:id",
+  "/delete/:id",
   validateParams(employeeIdSchema),
   deleteEmployeeController
 );
