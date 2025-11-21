@@ -1,3 +1,5 @@
+
+
 ---
 # **Desafio Técnico de Tiago de Figueiredo – Para a Vaga de Desenvolvedor Web Backend Júnior**
 
@@ -25,8 +27,7 @@ Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade
 ### **Empresa**
 
 CRUD completo:
-
-1. Criar uma Empresa
+1. Criar uma Empresa 
 2. Listar todas empresas Cadastradas (Opcional)
 3. Listar uma empresa Cadastradas pelo CNPJ ou Varias Por Nome
 4. Atualizar os dados de uma Empresa.
@@ -185,15 +186,19 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 ## **Arquitetura Geral**
 
 src/
-├── controllers/
-├── services/
-├── middlewares/
-├── models/
-├── routes/
-└── server.ts
+ ├── controllers/
+ ├── database/
+ ├── docs/
+ ├── middlewares/
+ ├── models/
+ ├── routes/
+ ├── schemas/
+ ├── services/
+ └── index.ts
+ └── server.ts
+
 
 ## **Fluxo Geral**
-
 Request
    ↓
 ROUTE
@@ -209,6 +214,5 @@ Model (Mongoose)
 MongoDB (Persistência)
    ↓
 Response
-
 
 ---
