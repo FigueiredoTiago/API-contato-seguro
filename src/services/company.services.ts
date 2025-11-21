@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { CompanyModel } from "../models/company.model";
 import { EmployeeModel } from "../models/employee.model";
@@ -15,7 +14,7 @@ interface CreateCompanyWithEmployeeDTO {
   employee: Omit<CreateEmployeeDTO, "companyId">;
 }
 
-//Modo Dev
+//Modo Dev - nao usa Transaction
 export const createCompanyWithEmployeeService = async (
   data: CreateCompanyWithEmployeeDTO
 ) => {
@@ -44,6 +43,7 @@ export const createCompanyWithEmployeeService = async (
 };
 
 //Atomico e Melhor para Producao
+
 // export const createCompanyWithEmployeeService = async (
 //   data: CreateCompanyWithEmployeeDTO
 // ) => {
@@ -87,7 +87,6 @@ export const createCompanyWithEmployeeService = async (
 // };
 
 //service para criar uma Nova Empresa
-
 export const createCompanyService = async (data: CreateCompanyDTO) => {
   try {
     const company = await CompanyModel.create(data);
@@ -97,11 +96,10 @@ export const createCompanyService = async (data: CreateCompanyDTO) => {
       throw new Error("CNPJ already exists");
     }
     throw error;
-  } 
+  }
 };
 
 //service para Buscar informacao de Uma empresa pelo CNPJ ou Pelo Nome
-
 export const getCompanyService = async (query: GetCompanyQueryDTO) => {
   const filter: any = {};
 

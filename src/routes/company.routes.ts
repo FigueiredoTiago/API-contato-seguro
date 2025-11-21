@@ -42,13 +42,13 @@ router.post("/create", validate(createCompanySchema), createCompanyController);
 
 //rota para listar todos os funcionarios de uma empresa
 router.get(
-  "/:id",
+  "/info/:id",
   validateParams(companyIdSchema),
   listCompanyEmployeesController
 );
 
 //rota para deletar uma empresa e seus funcionarios
-router.delete("/:id", validateParams(companyIdSchema), deleteCompanyController);
+router.delete("/delete/:id", validateParams(companyIdSchema), deleteCompanyController);
 
 //rota para atualizar uma empresa
 
