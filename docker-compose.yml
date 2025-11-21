@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   # ------------------------
-  # PRODUÇÃO >> docker compose --profile prod up --build
+  # PRODUÇÃO - UTILIZAR O Dockerfile !!!
 
   # ------------------------
   api:
