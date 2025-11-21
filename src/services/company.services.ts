@@ -15,37 +15,56 @@ interface CreateCompanyWithEmployeeDTO {
   employee: Omit<CreateEmployeeDTO, "companyId">;
 }
 
-//Modo Dev - nao usa Transaction - caso alguma etapa de erro pode ser que os dados venham a ficar "perdidos" - usei apenas em DEV
-// export const createCompanyWithEmployeeService = async (
-//   data: CreateCompanyWithEmployeeDTO
-// ) => {
-//   try {
-//     const company = await CompanyModel.create(data.company);
+//Modo Dev - nao usa Transaction - Explicado no readme - usei apenas em DEV
+export const createCompanyWithEmployeeService = async (
+  data: CreateCompanyWithEmployeeDTO
+) => {
+  const existingCompany = await CompanyModel.findOne({
+    cnpj: data.company.cnpj,
+  });
 
-//     const hashedPassword = await bcrypt.hash(data.employee.password, 10);
+  if (existingCompany) {
+    throw {
+      status: 400,
+      message: "CNPJ already exists.",
+    };
+  }
 
-//     const employee = await EmployeeModel.create({
-//       ...data.employee,
-//       password: hashedPassword,
-//       companyId: company._id,
-//     });
+  const existingEmployee = await EmployeeModel.findOne({
+    email: data.employee.email,
+  });
 
-//     return { company, employee };
-//   } catch (error: any) {
-//     if (error.code === 11000) {
-//       throw new Error("CNPJ Or Employee already exists");
-//     }
-//     throw {
-//       status: 500,
-//       message: "Error creating company and employee",
-//       error,
-//     };
-//   }
-// };
+  if (existingEmployee) {
+    throw {
+      status: 400,
+      message: "Employee Email already exists.",
+    };
+  }
+
+  try {
+    const company = await CompanyModel.create(data.company);
+
+    const hashedPassword = await bcrypt.hash(data.employee.password, 10);
+
+    const employee = await EmployeeModel.create({
+      ...data.employee,
+      password: hashedPassword,
+      companyId: company._id,
+    });
+
+    return { company, employee };
+  } catch (error: any) {
+    throw {
+      status: 500,
+      message: "Error creating company and employee",
+      error,
+    };
+  }
+};
 
 /* Esse servico deve ser usado apenas na Producao, caso contrario o BD criado pelo Docker nao vai conseguir execultar.
 usamos esse servico para manter a consistencia dos dados na prod */
-export const createCompanyWithEmployeeService = async (
+/*export const createCompanyWithEmployeeService = async (
   data: CreateCompanyWithEmployeeDTO
 ) => {
   const existingCompany = await CompanyModel.findOne({
@@ -107,7 +126,7 @@ export const createCompanyWithEmployeeService = async (
       error,
     };
   }
-};
+}; */
 
 //service para criar uma Nova Empresa
 export const createCompanyService = async (data: CreateCompanyDTO) => {
