@@ -188,6 +188,6 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 
 ## **Fluxo Geral**
 
-![Diagrama do Fluxo](./fluxopi.png)
+![Diagrama do Fluxo](./fluxoapi.png)
 
 ---
