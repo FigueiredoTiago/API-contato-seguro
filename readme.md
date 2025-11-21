@@ -41,7 +41,7 @@ CRUD completo, incluindo:
 
 ## **Modelo do Banco de Dados**
 
-_— Link para imagem das tabelas…_
+![Diagrama do dataBase](./tabeladobd.png)
 
 ---
 
