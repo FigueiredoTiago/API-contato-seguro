@@ -130,7 +130,7 @@ export const updateCompanyController = async (req: Request, res: Response) => {
   const data = req.body;
 
   try {
-    const updated = await updateCompanyService(data, id);
+    const updated = await updateCompanyService(id, data);
 
     return res
       .status(200)

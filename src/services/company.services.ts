@@ -189,8 +189,8 @@ export const deleteCompanyService = async (id: string) => {
 };
 
 export const updateCompanyService = async (
-  data: CompanyUpdateDTO,
-  id: string
+  id: string,
+  data: CompanyUpdateDTO
 ) => {
   const company = await CompanyModel.findById(id);
 
