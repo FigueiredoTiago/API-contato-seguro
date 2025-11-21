@@ -6,18 +6,17 @@
 
 ### **Tecnologias Utilizadas**
 
-- Node
-- TypeScript
-- Express
-- MongoDB
-- Mongoose
-- Zod
-- Bcrypt
-- Docker
+* Node
+* TypeScript
+* Express
+* MongoDB
+* Mongoose
+* Zod
+* Bcrypt
+* Docker
 
 A documentação está disponível através do Swagger.
-Acesse aqui todas as rotas da API em tempo real:
-obs: Devido a inatividade o Servidor sera pausado, Entao Talvez acesar a doc ou a API pelos Links abaixo possua algum atraso.
+Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade do servidor):
 **[https://api-contato-seguro.onrender.com/api-docs](https://api-contato-seguro.onrender.com/api-docs)**
 
 ---
@@ -86,7 +85,6 @@ Se tentar rodar o script de DEV direto no terminal, a API até sobe, porém o ba
 
 Logo em Seguida sera te diponibilizado em seu terminal as seguintes URLs: http://localhost:5000 URL DA API || http://localhost:5000/api-docs URL DO SWAGGER DOCS
 
-A mensagem: MongoDB conectado com sucesso! - Indica que se conectou com sucesso no Banco de Dados.
 ---
 
 ## **Deseja Rodar a API Fora do Docker?**
