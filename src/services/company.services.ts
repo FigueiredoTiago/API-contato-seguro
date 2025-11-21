@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { CompanyModel } from "../models/company.model";
 import { EmployeeModel } from "../models/employee.model";
@@ -15,69 +16,25 @@ interface CreateCompanyWithEmployeeDTO {
 }
 
 //Modo Dev - nao usa Transaction
-export const createCompanyWithEmployeeService = async (
-  data: CreateCompanyWithEmployeeDTO
-) => {
-  try {
-    const company = await CompanyModel.create(data.company);
-
-    const hashedPassword = await bcrypt.hash(data.employee.password, 10);
-
-    const employee = await EmployeeModel.create({
-      ...data.employee,
-      password: hashedPassword,
-      companyId: company._id,
-    });
-
-    return { company, employee };
-  } catch (error: any) {
-    if (error.code === 11000) {
-      throw new Error("CNPJ Or Employee already exists");
-    }
-    throw {
-      status: 500,
-      message: "Error creating company and employee",
-      error,
-    };
-  }
-};
-
-//Atomico e Melhor para Producao
-
 // export const createCompanyWithEmployeeService = async (
 //   data: CreateCompanyWithEmployeeDTO
 // ) => {
-//   const session = await mongoose.startSession();
-//   session.startTransaction();
-
 //   try {
-//     const company = await CompanyModel.create([data.company], { session });
-
-//     const companyId = company[0]._id;
+//     const company = await CompanyModel.create(data.company);
 
 //     const hashedPassword = await bcrypt.hash(data.employee.password, 10);
 
-//     const employee = await EmployeeModel.create(
-//       [
-//         {
-//           ...data.employee,
-//           password: hashedPassword,
-//           companyId,
-//         },
-//       ],
-//       { session }
-//     );
+//     const employee = await EmployeeModel.create({
+//       ...data.employee,
+//       password: hashedPassword,
+//       companyId: company._id,
+//     });
 
-//     await session.commitTransaction();
-//     session.endSession();
-
-//     return {
-//       company: company[0],
-//       employee: employee[0],
-//     };
-//   } catch (error) {
-//     await session.abortTransaction();
-//     session.endSession();
+//     return { company, employee };
+//   } catch (error: any) {
+//     if (error.code === 11000) {
+//       throw new Error("CNPJ Or Employee already exists");
+//     }
 //     throw {
 //       status: 500,
 //       message: "Error creating company and employee",
@@ -85,6 +42,71 @@ export const createCompanyWithEmployeeService = async (
 //     };
 //   }
 // };
+
+//Atomico e Melhor para Producao// Se for Usar o BD da Producao Descomentar esse codigo e comentar o ACIMA dele.
+export const createCompanyWithEmployeeService = async (
+  data: CreateCompanyWithEmployeeDTO
+) => {
+  const existingCompany = await CompanyModel.findOne({
+    cnpj: data.company.cnpj,
+  });
+
+  if (existingCompany) {
+    throw {
+      status: 400,
+      message: "CNPJ already exists.",
+    };
+  }
+
+  const existingEmployee = await EmployeeModel.findOne({
+    email: data.employee.email,
+  });
+
+  if (existingEmployee) {
+    throw {
+      status: 400,
+      message: "Employee Email already exists.",
+    };
+  }
+
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const company = await CompanyModel.create([data.company], { session });
+
+    const companyId = company[0]._id;
+
+    const hashedPassword = await bcrypt.hash(data.employee.password, 10);
+
+    const employee = await EmployeeModel.create(
+      [
+        {
+          ...data.employee,
+          password: hashedPassword,
+          companyId,
+        },
+      ],
+      { session }
+    );
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return {
+      company: company[0],
+      employee: employee[0],
+    };
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw {
+      status: 500,
+      message: "Error creating company and employee",
+      error,
+    };
+  }
+};
 
 //service para criar uma Nova Empresa
 export const createCompanyService = async (data: CreateCompanyDTO) => {
