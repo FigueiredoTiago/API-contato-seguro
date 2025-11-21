@@ -8,14 +8,11 @@ export default {
   transform: {
     ...tsJestTransformCfg,
   },
+  verbose: true,
 
   roots: ["<rootDir>/src"],
 
-  testMatch: [
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "**/__tests__/**/*.test.ts"
-  ],
+  testMatch: ["**/*.test.ts", "**/*.spec.ts", "**/__tests__/**/*.test.ts"],
 
   extensionsToTreatAsEsm: [".ts"],
 };
