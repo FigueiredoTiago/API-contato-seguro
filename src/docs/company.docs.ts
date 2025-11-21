@@ -394,7 +394,8 @@ export const companyDocs = {
                         path: { type: "string", example: "id" },
                         message: {
                           type: "string",
-                          example: "O ID must be 24 characters long",
+                          example:
+                            "O ID must be 24 characters long OR At least one field must be filled in to edit.",
                         },
                       },
                     },
@@ -440,6 +441,8 @@ export const companyDocs = {
     get: {
       summary: "Retorna todas as empresas",
       tags: ["Company"],
+      description:
+        "Retorna Todas as empresas cadastradas sem filtro, caso queira ver uma unica empresa apena, usar a rota de busca com query.",
       responses: {
         200: {
           description: "Empresas retornadas com sucesso",
@@ -573,7 +576,7 @@ export const companyDocs = {
                 properties: {
                   message: {
                     type: "string",
-                    example: "Pelo menos cnpj ou name deve ser informado",
+                    example: "At least CNPJ or name must be provided",
                   },
                   errors: {
                     type: "array",
@@ -586,7 +589,7 @@ export const companyDocs = {
                         },
                         message: {
                           type: "string",
-                          example: "Pelo menos cnpj ou name deve ser informado",
+                          example: "At least CNPJ or name must be provided",
                         },
                       },
                     },

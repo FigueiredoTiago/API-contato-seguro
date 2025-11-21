@@ -22,7 +22,7 @@ export const getCompanyQuerySchema = z
     name: z.string().min(1, "Name is Required").optional(),
   })
   .refine((data) => data.cnpj !== undefined || data.name !== undefined, {
-    message: "Pelo menos cnpj ou name deve ser informado",
+    message: "At least CNPJ or name must be provided.",
     path: ["cnpj", "name"],
   });
 
@@ -60,7 +60,7 @@ export const updateCompanySchema = z
       data.city !== undefined ||
       data.state !== undefined,
     {
-      message: "Pelo menos um campo deve ser preenchido para editar",
+      message: "At least one field must be filled in to edit.",
       path: ["name", "sector", "cnpj", "city", "state"],
     }
   );

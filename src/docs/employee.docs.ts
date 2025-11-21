@@ -322,7 +322,7 @@ export const employeeDocs = {
                   message: {
                     type: "string",
                     example:
-                      "Pelo menos um campo deve ser preenchido para editar",
+                      "At least one field must be filled in to edit.",
                   },
                 },
               },

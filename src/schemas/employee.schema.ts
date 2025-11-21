@@ -35,7 +35,7 @@ export const updateEmployeeSchema = z
       data.password !== undefined ||
       data.companyId !== undefined,
     {
-      message: "Pelo menos um campo deve ser preenchido para editar",
+      message: "At least one field must be filled in to edit.",
       path: [
         "name",
         "email",
