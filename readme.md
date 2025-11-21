@@ -185,17 +185,9 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 
 ## **Arquitetura Geral**
 
-src/
- ├── controllers/
- ├── services/
- ├── middlewares/
- ├── models/
- ├── routes/
- └── server.ts
-
-
 
 ## **Fluxo Geral**
-Request > ROUTE > Middleware (Zod Validation) > Controller (Entrada/Saída) > Service (Regra de negócio) > Model (Mongoose) > MongoDB (Persistência) > Response
+
+![Diagrama do Fluxo](./fluxopi.png)
 
 ---
