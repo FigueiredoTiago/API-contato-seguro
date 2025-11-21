@@ -3,12 +3,16 @@
     "target": "ES2020",
     "module": "CommonJS",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "Node"
-  }
+  },
+  "include": [
+    "src",
+    "jest.config.ts"
+  ]
 }
 /* Esse servico deve ser usado apenas na Producao, caso contrario o BD criado pelo Docker nao vai conseguir execultar.
 usamos esse servico para manter a consistencia dos dados na prod */
