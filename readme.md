@@ -187,32 +187,15 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 
 src/
  ├── controllers/
- ├── database/
- ├── docs/
+ ├── services/
  ├── middlewares/
  ├── models/
  ├── routes/
- ├── schemas/
- ├── services/
- └── index.ts
  └── server.ts
 
 
+
 ## **Fluxo Geral**
-Request
-   ↓
-ROUTE
-   ↓
-Middleware (Zod Validation)
-   ↓
-Controller (Entrada/Saída)
-   ↓
-Service (Regra de negócio)
-   ↓
-Model (Mongoose)
-   ↓
-MongoDB (Persistência)
-   ↓
-Response
+Request > ROUTE > Middleware (Zod Validation) > Controller (Entrada/Saída) > Service (Regra de negócio) > Model (Mongoose) > MongoDB (Persistência) > Response
 
 ---
