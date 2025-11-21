@@ -15,7 +15,7 @@ interface CreateCompanyWithEmployeeDTO {
   employee: Omit<CreateEmployeeDTO, "companyId">;
 }
 
-//Modo Dev - nao usa Transaction
+//Modo Dev - nao usa Transaction - caso alguma etapa de erro pode ser que os dados venham a ficar "perdidos" - usei apenas em DEV
 // export const createCompanyWithEmployeeService = async (
 //   data: CreateCompanyWithEmployeeDTO
 // ) => {
@@ -43,7 +43,8 @@ interface CreateCompanyWithEmployeeDTO {
 //   }
 // };
 
-//Atomico e Melhor para Producao// Se for Usar o BD da Producao Descomentar esse codigo e comentar o ACIMA dele.
+/* Esse servico deve ser usado apenas na Producao, caso contrario o BD criado pelo Docker nao vai conseguir execultar.
+usamos esse servico para manter a consistencia dos dados na prod */
 export const createCompanyWithEmployeeService = async (
   data: CreateCompanyWithEmployeeDTO
 ) => {
