@@ -3,6 +3,8 @@ export const employeeDocs = {
     post: {
       summary: "Cria um novo funcionário vinculado a uma empresa já existente",
       tags: ["Employee"],
+      description:
+        "Experimente criar uma Empresa Antes ou Pegar o ID de uma existente nas Rotas de Company, para testar essa Rota.",
       requestBody: {
         required: true,
         content: {
@@ -194,7 +196,7 @@ export const employeeDocs = {
       summary: "Edita um funcionário já existente",
       tags: ["Employee"],
       description:
-        "Atualiza os dados de um Funcionario. Nenhum campo é obrigatório, mas ao menos um deve ser enviado.",
+        "Atualiza os dados de um Funcionario. Nenhum campo é obrigatório, mas ao menos um deve ser enviado, Utilize um ID valido para testar essa Rota corretamente.",
       parameters: [
         {
           name: "id",

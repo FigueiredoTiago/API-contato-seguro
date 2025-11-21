@@ -123,6 +123,8 @@ export const companyDocs = {
     post: {
       summary: "Cria uma nova empresa e o primeiro funcionário",
       tags: ["Company"],
+      description:
+        "Não é necessário Informar o ID da empresa nessa criação para o funcionário, pois assim que a empresa e criada ele e automaticamente atribuído.",
       requestBody: {
         required: true,
         content: {
@@ -148,6 +150,11 @@ export const companyDocs = {
                     email: { type: "string", example: "tiagoComT@email.com" },
                     role: { type: "string", example: "admin" },
                     status: { type: "string", example: "active" },
+                    createdAtDate: {
+                      type: "string",
+                      format: "date-time",
+                      example: "2025-11-20T08:00:00.000Z",
+                    },
                     password: { type: "string", example: "SenhaSegura123!" },
                   },
                   required: ["name", "email", "role", "status", "password"],
@@ -298,7 +305,7 @@ export const companyDocs = {
       summary: "Edita uma empresa existente",
       tags: ["Company"],
       description:
-        "Atualiza os dados de uma empresa. Nenhum campo é obrigatório, mas ao menos um deve ser enviado.",
+        "Atualiza os dados de uma empresa. Nenhum campo é obrigatório, mas ao menos um deve ser enviado, para testar essa Rota Experimente pegar um ID de alguma empresa na Rota GET/all",
       parameters: [
         {
           name: "id",
