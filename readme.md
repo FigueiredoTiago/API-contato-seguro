@@ -26,13 +26,18 @@ Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade
 
 ### **Empresa**
 
-CRUD completo
+CRUD completo:
+1. Criar uma Empresa 
+2. Listar todas empresas Cadastradas (Opcional)
+3. Listar uma empresa Cadastradas pelo CNPJ ou Varias Por Nome
+4. Atualizar os dados de uma Empresa.
+5. Deletar definitivamente uma Empresa.
 
 ### **Funcionário**
 
-CRUD completo, incluindo:
+CRUD completo:
 
-1. Criar um funcionário
+1. Criar um funcionário - Precisa ser Vinculado a uma empresa.
 2. Listar todos os funcionários de uma empresa
 3. Atualizar os dados de um funcionário
 4. Deletar definitivamente um funcionário
@@ -177,5 +182,38 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 - O Funcionário só pode ser criado se existir uma empresa cadastrada previamente.
 - A senha do Funcionário é salva no banco através de um **hash** para garantir segurança.
 - Sempre que um Funcionário é criado, editado ou visualizado, **a senha nunca é retornada** — mas pode ser alterada se necessário.
+
+## **Arquitetura Geral**
+
+src/
+ ├── controllers/
+ ├── database/
+ ├── docs/
+ ├── middlewares/
+ ├── models/
+ ├── routes/
+ ├── schemas/
+ ├── services/
+ └── index.ts
+ └── server.ts
+
+
+## **Fluxo Geral**
+
+Request
+   ↓
+ROUTE
+   ↓
+Middleware (Zod Validation)
+   ↓
+Controller (Entrada/Saída)
+   ↓
+Service (Regra de negócio)
+   ↓
+Model (Mongoose)
+   ↓
+MongoDB (Persistência)
+   ↓
+Response
 
 ---
