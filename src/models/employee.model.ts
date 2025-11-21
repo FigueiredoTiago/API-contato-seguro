@@ -44,6 +44,7 @@ const EmployeeSchema = new Schema<IEmployee>(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     companyId: {
       type: Schema.Types.ObjectId,
@@ -55,6 +56,12 @@ const EmployeeSchema = new Schema<IEmployee>(
     timestamps: true,
   }
 );
+
+EmployeeSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 export const EmployeeModel = mongoose.model<IEmployee>(
   "Employee",

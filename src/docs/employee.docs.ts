@@ -85,10 +85,6 @@ export const employeeDocs = {
                         type: ["string", "null"],
                         example: null,
                       },
-                      password: {
-                        type: "string",
-                        example: "$2b$10$pvWR8... (hash)",
-                      },
                       companyId: {
                         type: "string",
                         example: "691f399e1d97b2bc402ede34",
@@ -284,11 +280,6 @@ export const employeeDocs = {
                         type: ["string", "null"],
                         example: null,
                       },
-                      password: {
-                        type: "string",
-                        example:
-                          "$2b$10$VPKqToriorHLsvvo0idlcO7N4qs0y... (hash)",
-                      },
                       companyId: {
                         type: "string",
                         example: "691f399e1d97b2bc402ede34",
@@ -321,8 +312,7 @@ export const employeeDocs = {
                 properties: {
                   message: {
                     type: "string",
-                    example:
-                      "At least one field must be filled in to edit.",
+                    example: "At least one field must be filled in to edit.",
                   },
                 },
               },
@@ -418,10 +408,6 @@ export const employeeDocs = {
                           type: "string",
                           nullable: true,
                           example: null,
-                        },
-                        password: {
-                          type: "string",
-                          example: "***********",
                         },
                         companyId: {
                           type: "string",
