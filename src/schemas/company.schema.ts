@@ -66,3 +66,4 @@ export const updateCompanySchema = z
   );
 
 export type CompanyUpdateDTO = z.infer<typeof updateCompanySchema>;
+ 
