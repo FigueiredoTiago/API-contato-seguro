@@ -38,6 +38,7 @@ router.post(
   createCompanyWithEmployeeController
 );
 
+//rota de criacao apenas da empresa
 router.post("/create", validate(createCompanySchema), createCompanyController);
 
 //rota para listar todos os funcionarios de uma empresa

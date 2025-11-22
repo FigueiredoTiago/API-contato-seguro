@@ -12,7 +12,9 @@ export default {
 
   roots: ["<rootDir>/src"],
 
-  testMatch: ["**/*.test.ts", "**/*.spec.ts", "**/__tests__/**/*.test.ts"],
+  testMatch: ["**/*.test.ts", "**/*.spec.ts", "**/__tests__/**/*.test.ts", "**/tests/integration/**/*.test.ts", "**/tests/unit/**/*.test.ts",],
 
   extensionsToTreatAsEsm: [".ts"],
+
+  setupFilesAfterEnv: ["<rootDir>/src/tests/jest.setup.ts"],
 };
