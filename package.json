@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
     "test:int": "jest --testPathPatterns=src/tests/integration",
     "test:unit": "jest --testPathPatterns=src/tests/unit",
     "dev": "nodemon src/server.ts",
