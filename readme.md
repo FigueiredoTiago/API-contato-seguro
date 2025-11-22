@@ -78,7 +78,7 @@ O deploy da API foi feito na plataforma **Render** Bem como seu Banco de Dados n
 
 Faça o clone deste repositório em sua máquina local.
 
-### **Execução Local (Somente via Docker-Compose)**
+### **Execução Local (via Docker-Compose)**
 
 O projeto deve ser executado localmente com Docker **apenas** desta maneira:
 
