@@ -15,6 +15,8 @@
 * Bcrypt
 * Docker
 * Swagger-Docs
+* Jest
+* SuperTest
 
 A documentação está disponível através do Swagger.
 Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade do servidor):
