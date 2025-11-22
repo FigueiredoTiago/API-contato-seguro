@@ -20,12 +20,14 @@ const router = Router();
 //rota bonus
 router.get("/all", getAllEmployeesController);
 
+//cria um funcionario
 router.post(
   "/create",
   validate(createEmployeeSchema),
   createEmployeeController
 );
 
+//edita um funcionario
 router.patch(
   "/:id",
   validateParams(employeeIdSchema),
@@ -33,6 +35,7 @@ router.patch(
   updateEmployeeController
 );
 
+//apaga um funcionario
 router.delete(
   "/delete/:id",
   validateParams(employeeIdSchema),

@@ -58,6 +58,7 @@ const EmployeeSchema = new Schema<IEmployee>(
   }
 );
 
+//usei esse metodo para evitar o retorno desnecessario de password
 EmployeeSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;

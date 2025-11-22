@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { employeeSchema } from "./employee.schema";
+import mongoose from "mongoose";
 
 // schema de resposta de uma company
 export const companySchema = z.object({
@@ -16,6 +17,7 @@ export const companySchema = z.object({
 
 export type CompanyDTO = z.infer<typeof companySchema>;
 
+//schema para validar dados de criacao da company
 export const createCompanySchema = z.object({
   name: z.string("Name is required").nonempty("Name is required"),
 
@@ -31,7 +33,6 @@ export const createCompanySchema = z.object({
 export type CreateCompanyDTO = z.infer<typeof createCompanySchema>;
 
 //schema para validar a busca das informacoes de uma empresa pelo CNPJ ou Nome
-
 export const getCompanyQuerySchema = z
   .object({
     cnpj: z.string().min(1, "CNPJ is Required").optional(),
@@ -45,18 +46,21 @@ export const getCompanyQuerySchema = z
 export type GetCompanyQueryDTO = z.infer<typeof getCompanyQuerySchema>;
 
 //schema para validar os IDS
-
 export const companyIdSchema = z.object({
   id: z
     .string()
-    .length(24, "O ID must be 24 characters long")
-    .nonempty("O ID is required"),
+    .nonempty("O ID é obrigatório")
+    .refine((value) => /^[a-fA-F0-9]{24}$/.test(value), {
+      message: "O ID deve conter 24 caracteres hexadecimais",
+    })
+    .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+      message: "O ID não é um ObjectId válido",
+    }),
 });
 
 export type CompanyIdDTO = z.infer<typeof companyIdSchema>;
 
 //schema para validar atualizacao de uma empresa
-
 export const updateCompanySchema = z
   .object({
     name: z.string("Name is required").optional(),

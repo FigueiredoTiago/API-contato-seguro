@@ -1,6 +1,7 @@
 import { ZodObject, ZodError } from "zod";
 import { Request, Response, NextFunction } from "express";
 
+//Geral para validacao
 export const validate =
   (schema: ZodObject) => (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -22,6 +23,7 @@ export const validate =
     }
   };
 
+//validar apenas querys
 export const validateQuery =
   (schema: ZodObject) => (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -43,6 +45,7 @@ export const validateQuery =
     }
   };
 
+//validar apenas params
 export const validateParams =
   (schema: ZodObject) => (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -62,6 +65,7 @@ export const validateParams =
     }
   };
 
+//especifico para a validacao da criacao conjunta
 export const validateCompanyWithEmployee =
   (schema: ZodObject) => (req: Request, res: Response, next: NextFunction) => {
     try {
