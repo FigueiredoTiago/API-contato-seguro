@@ -212,8 +212,21 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 - O Funcionário só pode ser criado se existir uma empresa cadastrada previamente.
 - A senha do Funcionário é salva no banco através de um **hash** para garantir segurança.
 - Sempre que um Funcionário é criado, editado ou visualizado, **a senha nunca é retornada** — mas pode ser alterada se necessário.
+---
 
-## **Arquitetura Geral**
+### 🧩 Como a API lida com os dados
+
+A API usa **Zod** para validar tudo que entra: body, params e query.
+Antes de qualquer requisição chegar nos controllers ou services, ela passa por middlewares que:
+
+* checam se os dados estão no formato certo
+* validam IDs e tipos
+* convertem valores (como datas)
+* bloqueiam qualquer coisa fora do padrão
+
+Com isso, quando os dados chegam no controller/service, eles **já estão limpos, validados e tipados**, então não precisa ficar repetindo validação em todo lugar.
+
+Essa arquitetura deixa o código mais organizado, seguro e previsível — e o Zod ainda gera os tipos automaticamente, então tudo flui bem com TypeScript.
 
 
 ## **Fluxo Geral**
