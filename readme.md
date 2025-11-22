@@ -145,16 +145,31 @@ Nossa API foi configurada usando **Jest** para executar alguns testes que estão
 Os testes unitários são responsáveis por testar **todos os Middlewares, Controllers e Services** presentes na nossa aplicação.
 Ao executar o seguinte comando:
 
-```
-npm test
+```bash
+npm run test:unit
 ```
 
-você verá em seu terminal as informações dos testes aplicados.
+você verá em seu terminal as informações dos testes Unitarios aplicados.
 Todos os testes serão executados juntos, de uma só vez, e **não é necessário** estar com o servidor rodando para isso.
 
 Os testes unitários **não fazem nenhum tipo de alteração real no banco de dados**, apenas simulam os dados necessários.
 
 ![Saída de Exemplo dos Testes Unitários](./casetest.png)
+
+---
+
+Temos também testes de integração que estão configurados aqui e no GitHub Actions.
+Para rodá-los localmente, use o comando:
+
+```bash
+npm run test:int
+
+```
+
+Isso vai executar todos os testes de integração, e você verá uma saída parecida com a dos testes unitários no console.
+
+Esses testes usam um **banco de dados específico para testes**, então certifique-se de que o banco está rodando e de que a variável **MONGO_URI** está configurada corretamente no arquivo **.env.test**, localizado na raiz do nosso projeto.
+
 
 ---
 
