@@ -1,5 +1,3 @@
-
-
 ---
 # **Desafio Técnico de Tiago de Figueiredo – Para a Vaga de Desenvolvedor Web Backend Júnior**
 
@@ -28,7 +26,8 @@ Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade
 ### **Empresa**
 
 CRUD completo:
-1. Criar uma Empresa 
+
+1. Criar uma Empresa
 2. Listar todas empresas Cadastradas (Opcional)
 3. Listar uma empresa Cadastradas pelo CNPJ ou Varias Por Nome
 4. Atualizar os dados de uma Empresa.
@@ -95,7 +94,6 @@ Logo em Seguida sera diponibilizado em seu terminal as seguintes URLs: http://lo
 
 A mensagem **MongoDB conectado com sucesso!** Indica que a API se conectou ao BD com sucesso!
 
-
 ---
 
 ## **Deseja Rodar a API Fora do Docker?**
@@ -139,7 +137,7 @@ Fique tranquilo, foi criado apenas para este teste, use a vontade, Lembre-se que
 ---
 
 Mas ainda sim quer **usar um BD Local**, **deseja usar apenas o Docker para Gerar o BD**? Simples rode esse comando que vai apenas Rodar o Banco de Dados no Docker,
-nesse caso Nenhuma URI precisa ser alterada deixe como ela esta: 
+nesse caso Nenhuma URI precisa ser alterada deixe como ela esta:
 
 ```bash
 
@@ -181,7 +179,7 @@ Os testes unitários **não fazem nenhum tipo de alteração real no banco de da
 
 ## **TESTES DE INTEGRATION**
 
-Temos também **testes de integração** que estão configurados aqui e no GitHub Actions.
+Temos também **testes de integração** que estão configurados aqui e no GitHub Actions(Desativei por enquanto).
 Para rodá-los localmente, use o comando:
 
 ```bash
@@ -194,6 +192,9 @@ Isso vai executar todos os testes de integração, e você verá uma saída pare
 
 Esses testes usam um **banco de dados específico para testes**, então certifique-se de que o banco está rodando e de que a variável **MONGO_URI** está configurada corretamente no arquivo **.env.test**, localizado na raiz do nosso projeto.
 
+Ao finalizar os testes a resposta esperada no terminal semelhante a essa abaixo:
+
+![Saída de Exemplo dos Testes de Integration](./integrationtst.png)
 
 ---
 
@@ -236,7 +237,7 @@ Garante **consistência total** entre Empresa e Funcionário.
 - Se falhar a criação da empresa → nada é salvo
 - Banco sempre íntegro
 
-###  **Desenvolvimento Local (sem transações) – Banco DOCKER**
+### **Desenvolvimento Local (sem transações) – Banco DOCKER**
 
 Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 
@@ -251,6 +252,7 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 - O Funcionário só pode ser criado se existir uma empresa cadastrada previamente.
 - A senha do Funcionário é salva no banco através de um **hash** para garantir segurança.
 - Sempre que um Funcionário é criado, editado ou visualizado, **a senha nunca é retornada** — mas pode ser alterada se necessário.
+
 ---
 
 ### Como a API lida com os dados
@@ -258,15 +260,14 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 A API usa **Zod** para validar tudo que entra: body, params e query.
 Antes de qualquer requisição chegar nos controllers ou services, ela passa por middlewares que:
 
-* checam se os dados estão no formato certo
-* validam IDs e tipos
-* convertem valores (como datas)
-* bloqueiam qualquer coisa fora do padrão
+- checam se os dados estão no formato certo
+- validam IDs e tipos
+- convertem valores (como datas)
+- bloqueiam qualquer coisa fora do padrão
 
 Com isso, quando os dados chegam no controller/service, eles **já estão limpos, validados e tipados**, então não precisa ficar repetindo validação em todo lugar.
 
 Essa arquitetura deixa o código mais organizado, seguro e previsível — e o Zod ainda gera os tipos automaticamente, então tudo flui bem com TypeScript.
-
 
 ## **Fluxo Geral**
 

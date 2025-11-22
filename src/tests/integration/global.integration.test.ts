@@ -131,7 +131,6 @@ describe("GET /company/info - Integration Test", () => {
   let companyData: any;
 
   beforeEach(async () => {
-    
     companyData = {
       name: "Empresa Info Teste",
       sector: "TI",
@@ -191,4 +190,280 @@ describe("GET /company/info - Integration Test", () => {
   });
 });
 
+//Apagar uma empresa
+describe("DELETE /company/delete/:id - Integration Test", () => {
+  let companyId: string;
 
+  beforeEach(async () => {
+    const companyData = {
+      name: "Empresa Teste Delete",
+      sector: "TI",
+      cnpj: "98765432109876",
+      city: "São Paulo",
+      state: "SP",
+    };
+
+    const res = await request(app).post("/company/create").send(companyData);
+
+    companyId = res.body.company?._id;
+  });
+
+  it("Deve deletar a empresa com sucesso e retornar 200", async () => {
+    const res = await request(app).delete(`/company/delete/${companyId}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty(
+      "message",
+      "Company and employees deleted successfully"
+    );
+  });
+
+  it("Deve retornar 404 ao tentar deletar ID que não existe", async () => {
+    const fakeId = "123456789012345678901234";
+
+    const res = await request(app).delete(`/company/delete/${fakeId}`);
+
+    expect(res.status).toBe(404);
+    expect(res.body?.message).toBe("Company not Found");
+  });
+
+  it("Deve retornar 400 ao enviar ID inválido", async () => {
+    const invalidId = "123";
+
+    const res = await request(app).delete(`/company/delete/${invalidId}`);
+
+    expect(res.status).toBe(400);
+  });
+});
+
+//criar um funcionario
+describe("POST /employee/create - Integration Test", () => {
+  let companyId: string;
+
+  beforeEach(async () => {
+    const companyData = {
+      name: "TF-SCRIPT",
+      sector: "TI",
+      cnpj: "123456789/0001",
+      city: "São Paulo",
+      state: "SP",
+    };
+
+    const res = await request(app).post("/company/create").send(companyData);
+    companyId = res.body.company?._id;
+  });
+
+  it("Deve criar um funcionário com sucesso e retornar 200", async () => {
+    const employeeData = {
+      name: "Tiago Figueiredo",
+      email: "testeteste@example.com",
+      role: "web developer",
+      status: "active",
+      createdAtDate: "2025-11-20T08:00:00.000Z",
+      terminationDate: null,
+      password: "SenhaSegura1236@!",
+      companyId,
+    };
+
+    const res = await request(app).post("/employee/create").send(employeeData);
+
+    expect(res.status).toBe(201);
+    expect(res.body).toHaveProperty("message", "Employee created successfully");
+    expect(res.body).toHaveProperty("employee");
+    expect(res.body.employee).toHaveProperty("_id");
+    expect(res.body.employee.name).toBe(employeeData.name);
+    expect(res.body.employee.email).toBe(employeeData.email);
+    expect(res.body.employee.companyId).toBe(companyId);
+  });
+
+  it("Deve retornar 400 ao enviar dados inválidos", async () => {
+    const res = await request(app).post("/employee/create").send({
+      name: "", // inválido
+      email: "emailinvalido",
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty("message");
+  });
+});
+
+//editar um funcionario
+describe("PATCH /employee/:id - Integration Test", () => {
+  let companyId: string;
+  let employeeId: string;
+
+  beforeEach(async () => {
+    const companyData = {
+      name: "TF-SCRIPT",
+      sector: "TI",
+      cnpj: "123456789/0001",
+      city: "São Paulo",
+      state: "SP",
+    };
+
+    const companyRes = await request(app)
+      .post("/company/create")
+      .send(companyData);
+
+    companyId = companyRes.body.company?._id;
+
+    const employeeData = {
+      name: "Joao Figueiredo",
+      email: "testeteste@example.com",
+      role: "web developer",
+      status: "active",
+      createdAtDate: "2025-11-20T08:00:00.000Z",
+      terminationDate: null,
+      password: "SenhaSegura1236@!",
+      companyId,
+    };
+
+    const employeeRes = await request(app)
+      .post("/employee/create")
+      .send(employeeData);
+
+    employeeId = employeeRes.body.employee?._id;
+  });
+
+  it("Deve atualizar o funcionário com sucesso e retornar 200", async () => {
+    const updatedData = {
+      name: "Romario filho junior",
+      role: "Desenvolvedor",
+    };
+
+    const res = await request(app)
+      .patch(`/employee/${employeeId}`)
+      .send(updatedData);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("message", "Employee updated Successfully");
+    expect(res.body).toHaveProperty("updated");
+    expect(res.body.updated._id).toBe(employeeId);
+    expect(res.body.updated.name).toBe(updatedData.name);
+    expect(res.body.updated.role).toBe(updatedData.role);
+  });
+
+  it("Deve retornar 404 ao tentar atualizar ID que não existe", async () => {
+    const fakeId = "123456789012345678901234";
+    const res = await request(app).patch(`/employee/${fakeId}`).send({
+      name: "Teste Falho",
+    });
+
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Employee not Found");
+  });
+
+  it("Deve retornar 400 ao enviar body vazio", async () => {
+    const res = await request(app).patch(`/employee/${employeeId}`).send({});
+    expect(res.status).toBe(400);
+  });
+});
+
+//Pegar os funcionarios de uma empresa
+describe("GET /company/info/:id - Integration Test", () => {
+  let companyId: string;
+  let employeeId: string;
+
+  beforeEach(async () => {
+    const companyData = {
+      name: "Tech Solutions",
+      sector: "TI",
+      cnpj: "994993494399/0001",
+      city: "São Paulo",
+      state: "SP",
+    };
+
+    const companyRes = await request(app)
+      .post("/company/create")
+      .send(companyData);
+    companyId = companyRes.body.company?._id;
+
+    const employeeData = {
+      name: "Romario filho junior",
+      email: "tiagocomgh@email.com",
+      role: "Desenvolvedor",
+      status: "active",
+      createdAtDate: "2025-11-20T08:00:00.000Z",
+      terminationDate: null,
+      password: "SenhaSegura1236@!",
+      companyId,
+    };
+
+    const employeeRes = await request(app)
+      .post("/employee/create")
+      .send(employeeData);
+
+    employeeId = employeeRes.body.employee?._id;
+  });
+
+  it("Deve retornar a empresa e seus funcionários corretamente", async () => {
+    const res = await request(app).get(`/company/info/${companyId}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("company");
+    expect(res.body).toHaveProperty("employees");
+    expect(res.body.company._id).toBe(companyId);
+    expect(res.body.employees).toHaveLength(1);
+    expect(res.body.employees[0]._id).toBe(employeeId);
+  });
+
+  it("Deve retornar 404 quando a empresa não existir", async () => {
+    const fakeId = "123456789012345678901234";
+    const res = await request(app).get(`/company/info/${fakeId}`);
+
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Company not Found");
+  });
+});
+
+//deletar UM funcionario por ID dele
+describe("DELETE /employee/delete/:id - Integration Test", () => {
+  let companyId: string;
+  let employeeId: string;
+
+  beforeEach(async () => {
+    const companyData = {
+      name: "Tech Solutions",
+      sector: "TI",
+      cnpj: "994993494399/0001",
+      city: "São Paulo",
+      state: "SP",
+    };
+
+    const companyRes = await request(app)
+      .post("/company/create")
+      .send(companyData);
+    companyId = companyRes.body.company?._id;
+
+    const employeeData = {
+      name: "Romario filho junior",
+      email: "tiagocomgh@email.com",
+      role: "Desenvolvedor",
+      status: "active",
+      createdAtDate: "2025-11-20T08:00:00.000Z",
+      terminationDate: null,
+      password: "SenhaSegura1236@!",
+      companyId,
+    };
+
+    const employeeRes = await request(app)
+      .post("/employee/create")
+      .send(employeeData);
+    employeeId = employeeRes.body.employee?._id;
+  });
+
+  it("Deve deletar o funcionário com sucesso e retornar 200", async () => {
+    const res = await request(app).delete(`/employee/delete/${employeeId}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("message", "Employee deleted successfully");
+  });
+
+  it("Deve retornar 404 ao tentar deletar um funcionário que não existe", async () => {
+    const fakeId = "123456789012345678901234";
+    const res = await request(app).delete(`/employee/delete/${fakeId}`);
+
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Employee not Found");
+  });
+});
