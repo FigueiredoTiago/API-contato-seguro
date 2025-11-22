@@ -8,9 +8,12 @@ import {
   createCompanyWithEmployeeService,
 } from "../services/company.services";
 import { Request, Response } from "express";
-import { GetCompanyQueryDTO } from "../schemas/company.schema";
+import {
+  GetCompanyQueryDTO,
+  CreateCompanyDTO,
+  CompanyUpdateDTO,
+} from "../schemas/company.schema";
 import { CreateEmployeeDTO } from "../schemas/employee.schema";
-import { CreateCompanyDTO } from "../schemas/company.schema";
 
 interface CreateCompanyWithEmployeeDTO {
   company: CreateCompanyDTO;
@@ -45,7 +48,7 @@ export const createCompanyWithEmployeeController = async (
 
 //controller para criar uma empresa
 export const createCompanyController = async (req: Request, res: Response) => {
-  const data = req.body;
+  const data: CreateCompanyDTO = req.body;
 
   try {
     const company = await createCompanyService(data);
@@ -64,16 +67,15 @@ export const createCompanyController = async (req: Request, res: Response) => {
 //controller para buscar informacoes de uma Empresa pelo Cnpj ou Pelo nome
 
 export const getCompanyController = async (req: Request, res: Response) => {
-  const query = req.query;
+  const query: GetCompanyQueryDTO = req.query;
 
   try {
-    const companies = await getCompanyService(query as GetCompanyQueryDTO);
+    const companies = await getCompanyService(query);
     if (companies.length === 0) {
       return res.status(404).json({
         message: "No companies found matching the provided criteria",
       });
     }
-
     return res.status(200).send({ companies });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
@@ -127,7 +129,7 @@ export const deleteCompanyController = async (req: Request, res: Response) => {
 
 export const updateCompanyController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const data = req.body;
+  const data: CompanyUpdateDTO = req.body;
 
   try {
     const updated = await updateCompanyService(id, data);

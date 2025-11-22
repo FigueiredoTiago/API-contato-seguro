@@ -1,4 +1,20 @@
 import { z } from "zod";
+import { employeeSchema } from "./employee.schema";
+
+// schema de resposta de uma company
+export const companySchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  sector: z.string(),
+  cnpj: z.string(),
+  city: z.string(),
+  state: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  __v: z.number(),
+});
+
+export type CompanyDTO = z.infer<typeof companySchema>;
 
 export const createCompanySchema = z.object({
   name: z.string("Name is required").nonempty("Name is required"),
@@ -66,4 +82,13 @@ export const updateCompanySchema = z
   );
 
 export type CompanyUpdateDTO = z.infer<typeof updateCompanySchema>;
- 
+
+//schema para retorno de Company com Lista de Employees:
+export const companyWithEmployeesSchema = z.object({
+  company: companySchema,
+  employees: z.array(employeeSchema),
+});
+
+export type CompanyWithEmployeesDTO = z.infer<
+  typeof companyWithEmployeesSchema
+>;

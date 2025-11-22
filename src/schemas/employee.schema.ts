@@ -1,5 +1,22 @@
 import { z } from "zod";
 
+// schema de saida de um employee
+export const employeeSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  email: z.string(),
+  role: z.string(),
+  status: z.string(),
+  createdAtDate: z.string(),
+  terminationDate: z.string().nullable(),
+  companyId: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  __v: z.number(),
+});
+
+export type EmployeeDTO = z.infer<typeof employeeSchema>;
+
 export const createEmployeeSchema = z.object({
   name: z.string("Name is required").nonempty("Name is required"),
   email: z.string("Email is required").nonempty("Email is required"),
