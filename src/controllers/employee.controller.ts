@@ -44,7 +44,6 @@ export const updateEmployeeController = async (req: Request, res: Response) => {
       .json({ message: "Employee updated Successfully", updated });
   } catch (error: any) {
     if (error.status === 404) {
-      console.log(error);
       return res.status(404).json({ message: error.message });
     }
     return res.status(500).json({ message: "Internal Server Error" });

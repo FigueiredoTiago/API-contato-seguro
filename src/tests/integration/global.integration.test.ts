@@ -85,8 +85,6 @@ describe("PATCH /company/:id - Integration Test", () => {
 
     const res = await request(app).post("/company/create").send(companyData);
 
-    console.log(res.body);
-
     companyId = res.body.company?._id;
   });
 
