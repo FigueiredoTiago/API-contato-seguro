@@ -1,3 +1,4 @@
+
 ---
 # **Desafio Técnico de Tiago de Figueiredo – Para a Vaga de Desenvolvedor Web Backend Júnior**
 
@@ -18,6 +19,8 @@
 A documentação está disponível através do Swagger.
 Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade do servidor):
 **[https://api-contato-seguro.onrender.com/api-docs](https://api-contato-seguro.onrender.com/api-docs)**
+
+![docs da api com swagger](./docsimg.png)
 
 ---
 
@@ -272,5 +275,8 @@ Essa arquitetura deixa o código mais organizado, seguro e previsível — e o Z
 ## **Fluxo Geral**
 
 ![Diagrama do Fluxo](./fluxoapi.png)
+
+
+## ** "A felicidade de se trabalhar com o que gosta, é o principal ponto de partida para o sucesso na vida!" Criado com Muito ♡ por Tiago Figueiredo**
 
 ---
