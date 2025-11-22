@@ -6,7 +6,12 @@ describe("POST /company/create - Integration Test", () => {
   // Conecta ao banco antes dos testes
   beforeAll(async () => {
     try {
-      await mongoose.connect(process.env.MONGO_URI as string);
+      console.log("Conectando ao Mongo:", process.env.MONGO_URI);
+      console.log("MONGO_URI:", process.env.MONGO_URI);
+
+      await mongoose.connect(process.env.MONGO_URI as string, {
+        serverSelectionTimeoutMS: 5000, // força erro rápido
+      });
       console.log("MongoDB conectado 👍");
     } catch (err) {
       console.error("Erro ao conectar no Mongo:", err);

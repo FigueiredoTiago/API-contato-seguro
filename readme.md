@@ -126,13 +126,34 @@ Assim, você estará utilizando o banco **REAL**, criado no MongoDB Atlas (produ
 
 Agora é só rodar o comando:
 
-```
+```bash
 npm run dev
 
 ```
 
 A API iniciará localmente, **porém usando o banco REAL de produção**.
 Fique tranquilo, foi criado apenas para este teste, use a vontade, Lembre-se que pode ter atraso, pois usa um BD FREE.
+
+---
+
+---
+
+Mas ainda sim quer **usar um BD Local**, **deseja usar apenas o Docker para Gerar o BD**? Simples rode esse comando que vai apenas Rodar o Banco de Dados no Docker,
+nesse caso Nenhuma URI precisa ser alterada deixe como ela esta: 
+
+```bash
+
+docker compose --profile dev up -d mongo
+
+```
+
+Depois que o container com o mongo estiver funcionando, **Inicie o servidor com**:
+
+```bash
+
+npm run dev
+
+```
 
 ---
 
