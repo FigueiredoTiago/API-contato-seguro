@@ -19,7 +19,7 @@ beforeAll(async () => {
   }
 });
 
-// Limpa todas as coleções entre cada teste
+// Limpa todas as coleções entre cada teste evita duplicidade
 afterEach(async () => {
   const db = mongoose.connection.db;
   const collections = db ? await db.collections() : [];
@@ -75,7 +75,6 @@ describe("PATCH /company/:id - Integration Test", () => {
   let companyId: string;
 
   beforeEach(async () => {
-    // Criar empresa antes de cada teste PATCH
     const companyData = {
       name: "Empresa Teste Integration",
       sector: "TI",
@@ -88,7 +87,6 @@ describe("PATCH /company/:id - Integration Test", () => {
 
     console.log(res.body);
 
-    // Salva ID retornado corretamente
     companyId = res.body.company?._id;
   });
 
