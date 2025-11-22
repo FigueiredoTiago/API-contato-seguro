@@ -159,7 +159,7 @@ npm run dev
 
 ---
 
-## **TESTANDO NOSSA API LOCALMENTE**
+## **TESTANDO NOSSA API LOCALMENTE UNITARIOS**
 
 Nossa API foi configurada usando **Jest** para executar alguns testes que estão disponíveis no caminho `src/tests/unit/...`.
 
@@ -179,10 +179,13 @@ Os testes unitários **não fazem nenhum tipo de alteração real no banco de da
 
 ---
 
-Temos também testes de integração que estão configurados aqui e no GitHub Actions.
+## **TESTES DE INTEGRATION**
+
+Temos também **testes de integração** que estão configurados aqui e no GitHub Actions.
 Para rodá-los localmente, use o comando:
 
 ```bash
+
 npm run test:int
 
 ```
