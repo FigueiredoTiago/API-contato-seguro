@@ -5,7 +5,10 @@ import {
   getAllEmployeesService,
 } from "../services/employee.service";
 import { Request, Response } from "express";
-import { CreateEmployeeDTO } from "../schemas/employee.schema";
+import {
+  CreateEmployeeDTO,
+  UpdateEmployeeDTO,
+} from "../schemas/employee.schema";
 
 //controller para criar um funcionario
 
@@ -15,7 +18,7 @@ export const createEmployeeController = async (req: Request, res: Response) => {
     const employee = await createEmployeeService(data);
     return res
       .status(201)
-      .send({ message: "Employee created successfully", employee });
+      .json({ message: "Employee created successfully", employee });
   } catch (error: any) {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
@@ -29,17 +32,16 @@ export const createEmployeeController = async (req: Request, res: Response) => {
 };
 
 //controller para editar um funcionario
-
 export const updateEmployeeController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const data = req.body;
+  const data: UpdateEmployeeDTO = req.body;
 
   try {
     const updated = await updateEmployeeService(data, id);
 
     return res
       .status(200)
-      .send({ message: "Employee updated Successfully", updated });
+      .json({ message: "Employee updated Successfully", updated });
   } catch (error: any) {
     if (error.status === 404) {
       console.log(error);
@@ -56,7 +58,7 @@ export const deleteEmployeeController = async (req: Request, res: Response) => {
 
   try {
     await deleteEmployeeService(id);
-    return res.status(200).send({ message: "Employee deleted successfully" });
+    return res.status(200).json({ message: "Employee deleted successfully" });
   } catch (error: any) {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
@@ -77,12 +79,12 @@ export const getAllEmployeesController = async (
     if (employees.length === 0) {
       return res
         .status(404)
-        .send({ message: "No employees found", employees: [] });
+        .json({ message: "No employees found", employees: [] });
     }
 
     return res
       .status(200)
-      .send({ message: "Employees retrieved successfully", employees });
+      .json({ message: "Employees retrieved successfully", employees });
   } catch (error: any) {
     return res.status(500).json({ message: "Internal Server Error" });
   }

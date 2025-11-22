@@ -11,7 +11,7 @@ import { CompanyModel } from "../models/company.model";
 export const createEmployeeService = async (data: CreateEmployeeDTO) => {
   const company = await CompanyModel.findById(data.companyId);
   if (!company) {
-    throw { status: 404, message: "Company not Found" };
+    throw { status: 404, message: "Company not Found" };  
   }
 
   const existingEmployee = await EmployeeModel.findOne({
@@ -80,7 +80,6 @@ export const deleteEmployeeService = async (id: string) => {
 };
 
 //Service para listar TODOS os Funcionarios Cadastrados no BD --ROTA BONUS -
-
 export const getAllEmployeesService = async () => {
   const result = await EmployeeModel.find().lean();
   return result;

@@ -54,7 +54,7 @@ export const createCompanyController = async (req: Request, res: Response) => {
     const company = await createCompanyService(data);
     return res
       .status(201)
-      .send({ message: "Company created Successfully", company });
+      .json({ message: "Company created Successfully", company });
   } catch (error: any) {
     if (error.message === "CNPJ already exists") {
       return res.status(409).json({ message: error.message });
@@ -76,7 +76,7 @@ export const getCompanyController = async (req: Request, res: Response) => {
         message: "No companies found matching the provided criteria",
       });
     }
-    return res.status(200).send({ companies });
+    return res.status(200).json({ companies });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
@@ -96,9 +96,9 @@ export const listCompanyEmployeesController = async (
     if (result.employees.length === 0)
       return res
         .status(404)
-        .send({ message: "No employees found for this company" });
+        .json({ message: "No employees found for this company" });
 
-    return res.status(200).send(result);
+    return res.status(200).json(result);
   } catch (error: any) {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
@@ -116,7 +116,7 @@ export const deleteCompanyController = async (req: Request, res: Response) => {
     await deleteCompanyService(id);
     return res
       .status(200)
-      .send({ message: "Company and employees deleted successfully" });
+      .json({ message: "Company and employees deleted successfully" });
   } catch (error: any) {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
@@ -136,7 +136,7 @@ export const updateCompanyController = async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .send({ message: "Company updated Successfully", updated });
+      .json({ message: "Company updated Successfully", updated });
   } catch (error: any) {
     if (error.status === 404) {
       return res.status(404).json({ message: error.message });
@@ -153,11 +153,11 @@ export const getAllCompanyController = async (req: Request, res: Response) => {
     if (result.length === 0) {
       return res
         .status(404)
-        .send({ message: "No company found", companies: [] });
+        .json({ message: "No company found", companies: [] });
     }
     return res
       .status(200)
-      .send({ message: "Companies retrieved successfully", result });
+      .json({ message: "Companies retrieved successfully", result });
   } catch (error: any) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
