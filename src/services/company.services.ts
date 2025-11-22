@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; //nao remover, usa na prod.
 import bcrypt from "bcrypt";
 import { CompanyModel } from "../models/company.model";
 import { EmployeeModel } from "../models/employee.model";
@@ -158,7 +158,6 @@ export const getCompanyService = async (query: GetCompanyQueryDTO) => {
 };
 
 //service para listar todos os funcionarios vinculados a uma empresa
-
 export const listCompanyEmployeesService = async (id: string) => {
   const company = await CompanyModel.findById(id).lean();
   if (!company) {
@@ -174,7 +173,6 @@ export const listCompanyEmployeesService = async (id: string) => {
 };
 
 //servico para apagar uma empresa e seus funcionarios vinculados
-
 export const deleteCompanyService = async (id: string) => {
   const company = await CompanyModel.findById(id).lean();
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { objectIdSchema } from "./employee.schema";
 
 export const createCompanySchema = z.object({
   name: z.string("Name is required").nonempty("Name is required"),
@@ -20,7 +21,7 @@ export const createEmployeeSchema = z.object({
   createdAtDate: z.coerce.date(),
   terminationDate: z.coerce.date().optional(),
   password: z.string("Password is required").nonempty("Password is required"),
-  companyId: z.string("Company is required").optional(),
+  companyId: objectIdSchema.optional(),
 });
 
 // criacao paralela com ambas entidades

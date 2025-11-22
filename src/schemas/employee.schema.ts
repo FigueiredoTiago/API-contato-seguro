@@ -1,15 +1,29 @@
 import { z } from "zod";
 
+import mongoose from "mongoose";
+
+//schema apenas para verificacao de Id Correto
+export const objectIdSchema = z
+  .string()
+  .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+    message: "Invalid ObjectId",
+  });
+
+//schema para status do employee
+export const employeeStatus = z.enum(["active", "inactive"]);
+
+export type EmployeeStatus = z.infer<typeof employeeStatus>;
+
 // schema de saida de um employee
 export const employeeSchema = z.object({
   _id: z.string(),
   name: z.string(),
   email: z.string(),
   role: z.string(),
-  status: z.string(),
+  status: employeeStatus,
   createdAtDate: z.string(),
   terminationDate: z.string().nullable(),
-  companyId: z.string(),
+  companyId: objectIdSchema,
   createdAt: z.string(),
   updatedAt: z.string(),
   __v: z.number(),
@@ -17,6 +31,7 @@ export const employeeSchema = z.object({
 
 export type EmployeeDTO = z.infer<typeof employeeSchema>;
 
+//schema de criacao de novo employee
 export const createEmployeeSchema = z.object({
   name: z.string("Name is required").nonempty("Name is required"),
   email: z.string("Email is required").nonempty("Email is required"),
@@ -24,8 +39,8 @@ export const createEmployeeSchema = z.object({
   status: z.enum(["active", "inactive"]).default("active"),
   createdAtDate: z.coerce.date(),
   terminationDate: z.coerce.date().optional(),
-  password: z.string("Password is required").nonempty("Password is required"), //vou utilizar um Regex mais tarde aqui para ter seguranca
-  companyId: z.string("Company is required").nonempty("Company ID is required"),
+  password: z.string("Password is required").nonempty("Password is required"),
+  companyId: objectIdSchema.nonempty("Company ID is required"),
 });
 
 export type CreateEmployeeDTO = z.infer<typeof createEmployeeSchema>;
@@ -69,12 +84,16 @@ export const updateEmployeeSchema = z
 export type UpdateEmployeeDTO = z.infer<typeof updateEmployeeSchema>;
 
 //schema para validar os IDS
-
 export const employeeIdSchema = z.object({
   id: z
     .string()
-    .length(24, "O ID must be 24 characters long")
-    .nonempty("O ID is required"),
+    .nonempty("O ID é obrigatório")
+    .refine((value) => /^[a-fA-F0-9]{24}$/.test(value), {
+      message: "O ID deve conter 24 caracteres hexadecimais",
+    })
+    .refine((value) => mongoose.Types.ObjectId.isValid(value), {
+      message: "O ID não é um ObjectId válido",
+    }),
 });
 
 export type employeeIdDTO = z.infer<typeof employeeIdSchema>;

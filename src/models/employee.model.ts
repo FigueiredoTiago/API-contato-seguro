@@ -1,10 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
+import { EmployeeStatus, employeeStatus } from "../schemas/employee.schema";
 
 export interface IEmployee extends Document {
   name: string;
   email: string;
   role: string;
-  status: string;
+  status: EmployeeStatus;
   createdAtDate: Date;
   terminationDate?: Date;
   password: string;
@@ -30,7 +31,7 @@ const EmployeeSchema = new Schema<IEmployee>(
     },
     status: {
       type: String,
-      enum: ["active", "inactive"],
+      enum: employeeStatus.options,
       default: "active",
     },
     createdAtDate: {
