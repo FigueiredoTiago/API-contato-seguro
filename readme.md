@@ -86,7 +86,14 @@ O projeto deve ser executado localmente com Docker **apenas** desta maneira:
 2. Certifique-se de que o Docker está funcionando corretamente.
 3. Execute o comando:
 
+```bash
+npm install
+
 ```
+
+logo depois:
+
+```bash
 docker compose --profile dev up --build
 
 ```
