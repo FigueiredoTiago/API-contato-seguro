@@ -189,7 +189,7 @@ O service de produção usa **transações do MongoDB** (`session`, `startTransa
 
 ## **Diferenças Explicadas de Forma Simples**
 
-### ✔ **Produção (com transações) – Banco REAL**
+### **Produção (com transações) – Banco REAL**
 
 Garante **consistência total** entre Empresa e Funcionário.
 
@@ -197,13 +197,13 @@ Garante **consistência total** entre Empresa e Funcionário.
 - Se falhar a criação da empresa → nada é salvo
 - Banco sempre íntegro
 
-### ✔ **Desenvolvimento Local (sem transações) – Banco DOCKER**
+###  **Desenvolvimento Local (sem transações) – Banco DOCKER**
 
 Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 
-- Empresa criada ❌
-- Funcionário não criado ❌
-- Banco inconsistente ❌
+- Empresa criada X
+- Funcionário não criado X
+- Banco inconsistente X
 
 ---
 
@@ -214,7 +214,7 @@ Se ocorrer um erro no meio do processo, pode gerar dados quebrados:
 - Sempre que um Funcionário é criado, editado ou visualizado, **a senha nunca é retornada** — mas pode ser alterada se necessário.
 ---
 
-### 🧩 Como a API lida com os dados
+### Como a API lida com os dados
 
 A API usa **Zod** para validar tudo que entra: body, params e query.
 Antes de qualquer requisição chegar nos controllers ou services, ela passa por middlewares que:
