@@ -43,7 +43,7 @@ describe("Employee Controllers", () => {
       await createEmployeeController(req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(201);
-      expect(sendMock).toHaveBeenCalledWith({
+      expect(jsonMock).toHaveBeenCalledWith({
         message: "Employee created successfully",
         employee: employeeData,
       });
@@ -120,7 +120,7 @@ describe("Employee Controllers", () => {
       await updateEmployeeController(req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(200);
-      expect(sendMock).toHaveBeenCalledWith({
+      expect(jsonMock).toHaveBeenCalledWith({
         message: "Employee updated Successfully",
         updated: updatedData,
       });
@@ -165,7 +165,7 @@ describe("Employee Controllers", () => {
       await deleteEmployeeController(req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(200);
-      expect(sendMock).toHaveBeenCalledWith({
+      expect(jsonMock).toHaveBeenCalledWith({
         message: "Employee deleted successfully",
       });
     });
@@ -207,7 +207,7 @@ describe("Employee Controllers", () => {
       await getAllEmployeesController(req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(200);
-      expect(sendMock).toHaveBeenCalledWith({
+      expect(jsonMock).toHaveBeenCalledWith({
         message: "Employees retrieved successfully",
         employees,
       });
@@ -221,7 +221,7 @@ describe("Employee Controllers", () => {
       await getAllEmployeesController(req as Request, res as Response);
 
       expect(statusMock).toHaveBeenCalledWith(404);
-      expect(sendMock).toHaveBeenCalledWith({
+      expect(jsonMock).toHaveBeenCalledWith({
         message: "No employees found",
         employees: [],
       });

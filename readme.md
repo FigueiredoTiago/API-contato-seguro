@@ -15,6 +15,7 @@
 * Zod
 * Bcrypt
 * Docker
+* Swagger-Docs
 
 A documentação está disponível através do Swagger.
 Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade do servidor):
@@ -52,7 +53,7 @@ CRUD completo:
 
 ## **Ambiente de Produção**
 
-O deploy da API foi feito na plataforma **Render**.
+O deploy da API foi feito na plataforma **Render** Bem como seu Banco de Dados no **MongoDB Atlas**.
 
 - Rota principal da API:
   **[https://api-contato-seguro.onrender.com](https://api-contato-seguro.onrender.com)**
@@ -66,16 +67,16 @@ O deploy da API foi feito na plataforma **Render**.
 
 ### **Requisitos**
 
-- Ter o Node.js instalado
+- Ter o Node.js e TS instalado
 - Ter o Docker instalado
 
 **NÃO É NECESSÁRIO CRIAR NENHUMA VARIÁVEL DE AMBIENTE — já deixei tudo pronto para uso. CLONE AND PLAY.**
 
 Faça o clone deste repositório em sua máquina local.
 
-### **Execução Local (Somente via Docker)**
+### **Execução Local (Somente via Docker-Compose)**
 
-O projeto deve ser executado localmente **apenas** desta maneira:
+O projeto deve ser executado localmente com Docker **apenas** desta maneira:
 
 1. Acesse a pasta raiz do projeto no terminal.
 2. Certifique-se de que o Docker está funcionando corretamente.
@@ -83,13 +84,17 @@ O projeto deve ser executado localmente **apenas** desta maneira:
 
 ```
 docker compose --profile dev up --build
+
 ```
 
 Esse comando baixará as imagens necessárias do Node e do MongoDB, pois **a aplicação local usa o banco de dados criado pelo Docker**.
 
 Se tentar rodar o script de DEV direto no terminal, a API até sobe, porém o banco **não estará disponível**, já que ele é criado pelo Docker para o ambiente de desenvolvimento local.
 
-Logo em Seguida sera te diponibilizado em seu terminal as seguintes URLs: http://localhost:5000 URL DA API || http://localhost:5000/api-docs URL DO SWAGGER DOCS
+Logo em Seguida sera diponibilizado em seu terminal as seguintes URLs: http://localhost:5000 URL DA API && http://localhost:5000/api-docs URL DO SWAGGER DOCS
+
+A mensagem **MongoDB conectado com sucesso!** Indica que a API se conectou ao BD com sucesso!
+
 
 ---
 
@@ -101,6 +106,7 @@ No arquivo `.env` disponível na raiz do projeto, **comente** esta URL:
 
 ```
 #MONGO_URI=mongodb://mongo:27017/contatoseguro
+
 ```
 
 ### **Passo 2**
@@ -109,6 +115,7 @@ Logo abaixo, existe outra variável parecida:
 
 ```
 #MONGO_URI=mongodb+srv://<username>:<password>@contato-seguro-data-bas...
+
 ```
 
 Ela estará comentada.
@@ -121,10 +128,33 @@ Agora é só rodar o comando:
 
 ```
 npm run dev
+
 ```
 
 A API iniciará localmente, **porém usando o banco REAL de produção**.
-Fique tranquilo, foi criado apenas para este teste.
+Fique tranquilo, foi criado apenas para este teste, use a vontade, Lembre-se que pode ter atraso, pois usa um BD FREE.
+
+---
+
+---
+
+## **TESTANDO NOSSA API LOCALMENTE**
+
+Nossa API foi configurada usando **Jest** para executar alguns testes que estão disponíveis no caminho `src/tests/unit/...`.
+
+Os testes unitários são responsáveis por testar **todos os Middlewares, Controllers e Services** presentes na nossa aplicação.
+Ao executar o seguinte comando:
+
+```
+npm test
+```
+
+você verá em seu terminal as informações dos testes aplicados.
+Todos os testes serão executados juntos, de uma só vez, e **não é necessário** estar com o servidor rodando para isso.
+
+Os testes unitários **não fazem nenhum tipo de alteração real no banco de dados**, apenas simulam os dados necessários.
+
+![Saída de Exemplo dos Testes Unitários](./casetest.png)
 
 ---
 

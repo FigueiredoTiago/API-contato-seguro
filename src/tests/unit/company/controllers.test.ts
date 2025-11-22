@@ -49,7 +49,7 @@ describe("Company Controller - createCompanyController", () => {
 
     expect(companyService.createCompanyService).toHaveBeenCalledWith(req.body);
     expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       message: "Company created Successfully",
       company: fakeCompany,
     });
@@ -119,7 +119,7 @@ describe("Company Controller - updateCompanyController", () => {
     );
 
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       message: "Company updated Successfully",
       updated: fakeCompany,
     });
@@ -190,7 +190,7 @@ describe("Company Controller - getCompanyController", () => {
 
     expect(companyService.getCompanyService).toHaveBeenCalledWith(req.query);
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith({ companies: mockCompanies });
+    expect(res.json).toHaveBeenCalledWith({ companies: mockCompanies });
   });
 
   it("deve retornar 404 se nenhuma empresa for encontrada", async () => {
@@ -279,7 +279,7 @@ describe("Company Controller - getCompanyWithEmployeesController", () => {
       req.params.id
     );
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       company: mockCompany,
       employees: mockEmployees,
     });
@@ -295,7 +295,7 @@ describe("Company Controller - getCompanyWithEmployeesController", () => {
     await listCompanyEmployeesController(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       message: "No employees found for this company",
     });
   });
@@ -319,7 +319,7 @@ describe("Company Controller - getCompanyWithEmployeesController", () => {
     await listCompanyEmployeesController(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       message: "No employees found for this company",
     });
   });
@@ -371,7 +371,7 @@ describe("Company Controller - deleteCompanyController", () => {
       req.params.id
     );
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       message: "Company and employees deleted successfully",
     });
   });
