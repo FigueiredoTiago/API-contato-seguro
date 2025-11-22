@@ -297,6 +297,6 @@ Essa arquitetura deixa o código mais organizado, seguro e previsível — e o Z
 ![Diagrama do Fluxo](./fluxoapi.png)
 
 
-## ** "A felicidade de se trabalhar com o que gosta, é o principal ponto de partida para o sucesso na vida!" Criado com Muito ♡ por Tiago Figueiredo**
+## "A felicidade de se trabalhar com o que gosta, é o principal ponto de partida para o sucesso na vida!" Criado com Muito ♡ por Tiago Figueiredo.
 
 ---
