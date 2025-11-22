@@ -16,44 +16,6 @@ coverage/
 !.vscode/settings.json
 !.vscode/extensions.json
 
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-venv/
-env/
-.venv/
-
-# Java
-target/
-*.class
-*.jar
-*.war
-
-# .NET
-bin/
-obj/
-*.user
-*.suo
-*.userprefs
-.vs/
-*.dbmdl
-*.pdb
-
-# Go
-vendor/
-*.exe
-*.test
-*.out
-
-# Ruby
-*.gem
-.bundle/
-log/
-tmp/
-vendor/bundle/
-
 # Logs and runtime files
 logs/
 *.log
@@ -80,12 +42,7 @@ build/
 docker-compose.override.yml
 
 # Secrets and keys
-*.pem
-*.key
-*.crt
-credentials/
-secrets/
-.envrc
+
 
 # Misc
 coverage/
