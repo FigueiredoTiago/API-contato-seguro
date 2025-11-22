@@ -10,8 +10,6 @@ out/
 npm-debug.log*
 yarn-error.log*
 pnpm-lock.yaml
-.env.local
-.env.*.local
 coverage/
 .nyc_output/
 .vscode/*

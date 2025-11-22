@@ -108,7 +108,7 @@ A mensagem **MongoDB conectado com sucesso!** Indica que a API se conectou ao BD
 
 ---
 
-## **Deseja Rodar a API Fora do Docker?**
+## **Deseja Rodar a API Fora do Docker? Temos duas maneiras:**
 
 ### **Passo 1**
 
@@ -121,7 +121,7 @@ No arquivo `.env` disponível na raiz do projeto, **comente** esta URL:
 
 ### **Passo 2**
 
-Logo abaixo, existe outra variável parecida:
+Logo abaixo, existe outra variável parecida ESCRITA (PROD):
 
 ```
 #MONGO_URI=mongodb+srv://<username>:<password>@contato-seguro-data-bas...
@@ -129,7 +129,7 @@ Logo abaixo, existe outra variável parecida:
 ```
 
 Ela estará comentada.
-**Descomente essa.**
+**Descomente ela.**
 Assim, você estará utilizando o banco **REAL**, criado no MongoDB Atlas (produção).
 
 ### **Passo 3**
@@ -148,8 +148,8 @@ Fique tranquilo, foi criado apenas para este teste, use a vontade, Lembre-se que
 
 ---
 
-Mas ainda sim quer **usar um BD Local**, **deseja usar apenas o Docker para Gerar o BD**? Simples rode esse comando que vai apenas Rodar o Banco de Dados no Docker,
-nesse caso Nenhuma URI precisa ser alterada deixe como ela esta:
+Mas ainda sim quer **usar um BD Local**, **deseja usar apenas o Docker para Gerar o BD**? Simples rode esse comando que vai apenas Rodar o Banco de Dados no Docker, mas antes va na raiz do projeto ate o arquivo **.ENV**, e Descomente a URI que la esta indicando para rodar a api fora do Docker!!
+depois execulte:
 
 ```bash
 
@@ -165,11 +165,13 @@ npm run dev
 
 ```
 
----
+API Pronta pra usar!
 
 ---
 
-## **TESTANDO NOSSA API LOCALMENTE UNITARIOS**
+---
+
+## **TESTANDO NOSSA API LOCALMENTE - UNITARIOS**
 
 Nossa API foi configurada usando **Jest** para executar alguns testes que estão disponíveis no caminho `src/tests/unit/...`.
 
@@ -192,7 +194,16 @@ Os testes unitários **não fazem nenhum tipo de alteração real no banco de da
 ## **TESTES DE INTEGRATION**
 
 Temos também **testes de integração** que estão configurados aqui e no GitHub Actions(Desativei por enquanto).
-Para rodá-los localmente, use o comando:
+Para rodá-los localmente, pare o docker caso esteja em uso, utilize o comando para subir apenas o BD pelo docker esse comando abaixo:
+
+```bash
+
+docker compose --profile dev up -d mongo
+
+```
+
+Logo em seguida execulte os testes com o comando abaixo, **não é necessário** estar com o servidor rodando!!! **APENAS O BD PELO DOCKER** deve estar sendo usado
+caso contrario vai falhar!
 
 ```bash
 
