@@ -649,6 +649,8 @@ export const companyDocs = {
     get: {
       summary: "Lista empresa e todos os funcionários vinculados",
       tags: ["Company"],
+      description:
+        "Essa Rota retorna os dados de uma empresa, juntamente com todos os funcionários cadastrados nela, a busca da empresa e feita pelo ID da empresa.",
       parameters: [
         {
           name: "id",
