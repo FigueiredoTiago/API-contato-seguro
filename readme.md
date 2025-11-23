@@ -220,7 +220,7 @@ Esses testes usam um **banco de dados específico para testes**, então certifiq
 
 Ao finalizar os testes a resposta esperada no terminal semelhante a essa abaixo:
 
-![Saída de Exemplo dos Testes de Integration](./assets/integrationtst.png)
+![Saída de Exemplo dos Testes de Integration](./assets/integration.png)
 ---
 
 ## **Particularidades do Projeto**
