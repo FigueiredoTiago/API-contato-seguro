@@ -33,6 +33,7 @@ Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade
 CRUD completo:
 
 1. Criar uma Empresa
+1.1. Criar uma Empresa e Paralelamente um funcionario.
 2. Listar todas empresas Cadastradas (Opcional)
 3. Listar uma empresa Cadastradas pelo CNPJ ou Varias Por Nome
 4. Atualizar os dados de uma Empresa.
