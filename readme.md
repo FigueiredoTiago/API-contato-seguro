@@ -78,6 +78,7 @@ Com ele, é possível gerar a imagem otimizada da aplicação e subir o containe
 - Ter o Docker instalado
 
 **NÃO É NECESSÁRIO CRIAR NENHUMA VARIÁVEL DE AMBIENTE — já deixei tudo pronto para uso. CLONE AND PLAY.**
+(PROPOSITALMENTE O ENV FOI EXPOSTO APENAS PRA ESSE REPOSITÓRIO!)
 
 Faça o clone deste repositório em sua máquina local.
 
