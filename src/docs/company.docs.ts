@@ -3,6 +3,8 @@ export const companyDocs = {
     post: {
       summary: "Cria uma nova empresa",
       tags: ["Company"],
+      description:
+        "Essa Rota Cria uma empresa, os dados dessa empresas sera retornados ao criar.",
       requestBody: {
         required: true,
         content: {
@@ -509,6 +511,8 @@ export const companyDocs = {
     get: {
       summary: "Busca empresa por CNPJ ou mais de uma Por Nome",
       tags: ["Company"],
+      description:
+        "Essa Rota vai retornar Dados de uma empresa, Pesquisando atraves de Query passando o nome ou CNPJ dela.",
       parameters: [
         {
           name: "cnpj",

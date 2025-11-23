@@ -4,7 +4,7 @@ export const employeeDocs = {
       summary: "Cria um novo funcionário vinculado a uma empresa já existente",
       tags: ["Employee"],
       description:
-        "Experimente criar uma Empresa Antes ou Pegar o ID de uma existente nas Rotas de Company, para testar essa Rota.",
+        "Experimente criar uma Empresa Antes ou Pegar o ID de uma existente nas Rotas de Company, para testar essa Rota, ao final o employee sera retornado nessa rota.",
       requestBody: {
         required: true,
         content: {
