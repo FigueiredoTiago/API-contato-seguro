@@ -22,7 +22,7 @@ A documentação está disponível através do Swagger.
 Acesse aqui todas as rotas da API em tempo real (pode ter atraso Por Inatividade do servidor):
 **[https://api-contato-seguro.onrender.com/api-docs](https://api-contato-seguro.onrender.com/api-docs)**
 
-![docs da api com swagger](./docsimg.png)
+![docs da api com swagger](./assets/docsimg.png)
 
 ---
 
@@ -51,7 +51,7 @@ CRUD completo:
 
 ## **Modelo do Banco de Dados Company 1 -------- N Employee**
 
-![Diagrama do dataBase](./tabeladobd.png)
+![Diagrama do dataBase](./assets/tabeladobd.png)
 
 ---
 
@@ -190,7 +190,7 @@ Todos os testes serão executados juntos, de uma só vez, e **não é necessári
 
 Os testes unitários **não fazem nenhum tipo de alteração real no banco de dados**, apenas simulam os dados necessários.
 
-![Saída de Exemplo dos Testes Unitários](./casetest.png)
+![Saída de Exemplo dos Testes Unitários](./assets/casetest.png)
 
 ---
 
@@ -220,8 +220,7 @@ Esses testes usam um **banco de dados específico para testes**, então certifiq
 
 Ao finalizar os testes a resposta esperada no terminal semelhante a essa abaixo:
 
-![Saída de Exemplo dos Testes de Integration](./integrationtst.png)
-
+![Saída de Exemplo dos Testes de Integration](./assets/integrationtst.png)
 ---
 
 ## **Particularidades do Projeto**
@@ -297,7 +296,7 @@ Essa arquitetura deixa o código mais organizado, seguro e previsível — e o Z
 
 ## **Fluxo Geral**
 
-![Diagrama do Fluxo](./fluxoapi.png)
+![Diagrama do Fluxo](./assets/fluxoapi.png)
 
 
 ## "A felicidade de se trabalhar com o que gosta, é o principal ponto de partida para o sucesso na vida!" Criado com Muito ♡ por Tiago Figueiredo.
