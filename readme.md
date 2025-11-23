@@ -65,6 +65,9 @@ O deploy da API foi feito na plataforma **Render** Bem como seu Banco de Dados n
 - Documentação (Swagger):
   **[https://api-contato-seguro.onrender.com/api-docs](https://api-contato-seguro.onrender.com/api-docs)**
 
+Para realizar o deploy da API em um ambiente de produção, basta utilizar o Dockerfile que já está configurado na raiz do projeto.
+Com ele, é possível gerar a imagem otimizada da aplicação e subir o container rapidamente em qualquer servidor que tenha Docker instalado.
+
 ---
 
 ## **Como Executar Este Projeto Localmente?**
